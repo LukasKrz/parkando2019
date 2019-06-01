@@ -61,15 +61,15 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
-    fetch('/api/hello')
-      .then(response => response.text()) // res.json()
-      .then(message => {
-          this.setState({test: message});
-    });
+  // componentDidMount() {
+  //   fetch('/api/hello')
+  //     .then(response => response.text()) // res.json()
+  //     .then(message => {
+  //         this.setState({test: message});
+  //   });
 
-    this.logUser(this.state.card_id, this.state.userName, this.state.userSurname, this.state.user_type)
-  }
+  //   this.logUser(this.state.card_id, this.state.userName, this.state.userSurname, this.state.user_type)
+  // }
 
 // componentDidMount() {
 //     setInterval(this.hello, 250);
@@ -84,7 +84,7 @@ class App extends Component {
 // };
 
   render() {
-    console.log('TEsT: ', this.state.test);
+    // console.log('TEsT: ', this.state.test);
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
