@@ -59,7 +59,14 @@ class LoginPage extends Component {
           })
           }).then(response => {
             response.text().then(function(data) {
-                console.log(JSON.parse(data));
+              const objectResponse = JSON.parse(data);
+              this.setState({
+                userName: objectResponse.name,
+                userSurname: objectResponse.surname,
+                card_id: objectResponse.card_id,
+                user_type: objectResponse.user_type,
+                test: objectResponse.card_id
+              });
             })
             // console.log('RES: ', response.text());
             // this.setState({test: response.card_id});
