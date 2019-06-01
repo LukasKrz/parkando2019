@@ -12,6 +12,7 @@ class LoginPage extends Component {
     card_id: '',
     user_type: '',
     message: '',
+    test: '',
     
       errors: {
         userName: false,
@@ -43,47 +44,50 @@ class LoginPage extends Component {
     handleSubmit = e => {
       e.preventDefault();
       const validation = this.formValidation();
-      // TODO probably remove or modified when backend is in
-      const findUser = this.findUser(this.state.card_id, this.state.userName, this.state.userSurname);
-      const park_place_id = this.userParkingSpaceValidation(this.state.card_id, this.state.userName, this.state.userSurname);
-      const user_type = this.setUserType(this.state.card_id, this.state.userName, this.state.userSurname);
     
       if(validation.correct) {
-        //TODO GET
-        if(findUser) {
-          this.setState({
-            userName: '',
-            userSurname: '',
-            card_id: '',
-            message: 'Logowanie...',
-            user_type: user_type,
-            errors: {
-              userName: false,
-              userSurname: false,
-              card_id: false,
-            }
+        fetch('/api/studenci/walidacja',{
+          method: 'POST',
+          headers: {
+          Accept: 'application/json',
+                  'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            card_id: this.state.card_id,
+            name: this.state.userName,
+            surname: this.state.userSurname
           })
+          }).then(response => {
+            console.log('RES: ', response.text());
+            this.setState({test: response});
+          })
+          .catch(error =>{
+            console.log(error);
+          })  
 
-          this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname);
+
+        this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname); // dzienny zaoczny?
+
+        //   // this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname);
           
-          if(park_place_id === null) {
-            this.props.history.push(`/welcome/${this.state.card_id}`);
-          } else {
-            this.props.history.push(`/final-confirmation/${this.state.card_id}/${park_place_id}`)
-          }
+        //   if(park_place_id === null) {
+        //     this.props.history.push(`/welcome/${this.state.card_id}`);
+        //   } else {
+        //     this.props.history.push(`/final-confirmation/${this.state.card_id}/${park_place_id}`)
+        //   }
 
-          this.setState({
-            errors: {
-              userInDB: false,
-            }
-          })          
-        } else {
-          this.setState({
-            errors: {
-              userInDB: true,
-            }
-          })
-        }
+        //   this.setState({
+        //     errors: {
+        //       userInDB: false,
+        //     }
+        //   })          
+        // } else {
+        //   this.setState({
+        //     errors: {
+        //       userInDB: true,
+        //     }
+        //   })
+        // }
       } else {
         this.setState({
           errors: {
@@ -123,49 +127,49 @@ class LoginPage extends Component {
     }
 
     // TODO findUser, userParkingSpaceValidation, setUserType probably remove or modified when backend is in
-    findUser(cardNumber, userName, userSurname) {
-      // return this.props.users.filter(user =>
-      //   user.name.toLowerCase() === userName.toLowerCase()
-      //   && user.surname.toLowerCase() === userSurname.toLowerCase()
-      //   && user.card_id === Number(cardNumber));   
-      fetch('/api/studenci/walidacja',{
-        method: 'POST',
-        headers: {
-        Accept: 'application/json',
-                'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          card_id: cardNumber,
-          name: userName,
-          surname: userSurname
-        })
-        }).then(response => {
-          console.log('RES: ', response.json());
-          const res = response.json();
-          res.card_id !== null
-          ? res.map(s => console.log('RES: ', s))
-          : console.log(res);
-          return true;
-        })
-        .catch(error =>{
-          console.log(error);
-          return false;
-        })   
-    }
+    // findUser(cardNumber, userName, userSurname) {
+    //   // return this.props.users.filter(user =>
+    //   //   user.name.toLowerCase() === userName.toLowerCase()
+    //   //   && user.surname.toLowerCase() === userSurname.toLowerCase()
+    //   //   && user.card_id === Number(cardNumber));   
+    //   fetch('/api/studenci/walidacja',{
+    //     method: 'POST',
+    //     headers: {
+    //     Accept: 'application/json',
+    //             'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       card_id: cardNumber,
+    //       name: userName,
+    //       surname: userSurname
+    //     })
+    //     }).then(response => {
+    //       console.log('RES: ', response.json());
+    //       const res = response.json();
+    //       res.card_id !== null
+    //       ? res.map(s => console.log('RES: ', s))
+    //       : console.log(res);
+    //       return true;
+    //     })
+    //     .catch(error =>{
+    //       console.log(error);
+    //       return false;
+    //     })   
+    // }
 
-    userParkingSpaceValidation(cardNumber, userName, userSurname) {
-      const user = this.findUser(cardNumber, userName, userSurname);
-      let place = null; 
-      user.map(el => place = el.park_place_id)
-      return place;
-    }
+    // userParkingSpaceValidation(cardNumber, userName, userSurname) {
+    //   const user = this.findUser(cardNumber, userName, userSurname);
+    //   let place = null; 
+    //   user.map(el => place = el.park_place_id)
+    //   return place;
+    // }
 
-    setUserType(cardNumber, userName, userSurname) {
-      const user = this.findUser(cardNumber, userName, userSurname);
-      let type = ''; 
-      user.map(el => type = el.user_type)
-      return type;
-    }
+    // setUserType(cardNumber, userName, userSurname) {
+    //   const user = this.findUser(cardNumber, userName, userSurname);
+    //   let type = ''; 
+    //   user.map(el => type = el.user_type)
+    //   return type;
+    // }
     
     componentDidUpdate() {
       if(this.state.message !== '') {
@@ -174,6 +178,8 @@ class LoginPage extends Component {
     }
 
     render() {
+      console.log('TEST: ', this.state.test);
+      
       return (
         <div className="login-container">
           <div className="login-container__logo">
