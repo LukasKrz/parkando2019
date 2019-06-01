@@ -64,6 +64,24 @@ class LoginPage extends Component {
             }
           })
 
+          fetch('/api/studenci/walidacja',{
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              card_id: this.state.card_id,
+              name: this.state.userName,
+              surname: this.state.userSurname
+            }).then(response => {
+                console.log('RES:', response)
+            })
+            .catch(error =>{
+                console.log(error)
+            })
+          });
+
           this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname);
           
           if(park_place_id === null) {
