@@ -50,7 +50,7 @@ class LoginPage extends Component {
     
       if(validation.correct) {
         //TODO GET
-        if(findUser.length > 0) {
+        if(findUser) {
           this.setState({
             userName: '',
             userSurname: '',
@@ -63,24 +63,6 @@ class LoginPage extends Component {
               card_id: false,
             }
           })
-
-          fetch('/api/studenci/walidacja',{
-            method: 'POST',
-            headers: {
-            Accept: 'application/json',
-                    'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              card_id: this.state.card_id,
-              name: this.state.userName,
-              surname: this.state.userSurname
-            })
-            }).then(response => {
-              console.log('RES: ', response)
-            })
-            .catch(error =>{
-              console.log(error)
-            })
 
           this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname);
           
@@ -142,10 +124,33 @@ class LoginPage extends Component {
 
     // TODO findUser, userParkingSpaceValidation, setUserType probably remove or modified when backend is in
     findUser(cardNumber, userName, userSurname) {
-      return this.props.users.filter(user =>
-        user.name.toLowerCase() === userName.toLowerCase()
-        && user.surname.toLowerCase() === userSurname.toLowerCase()
-        && user.card_id === Number(cardNumber));      
+      // return this.props.users.filter(user =>
+      //   user.name.toLowerCase() === userName.toLowerCase()
+      //   && user.surname.toLowerCase() === userSurname.toLowerCase()
+      //   && user.card_id === Number(cardNumber));   
+      fetch('/api/studenci/walidacja',{
+        method: 'POST',
+        headers: {
+        Accept: 'application/json',
+                'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          card_id: cardNumber,
+          name: userName,
+          surname: userSurname
+        })
+        }).then(response => {
+          console.log('RES: ', response.json());
+          const res = response.json();
+          res.card_id !== null
+          ? res.map(s => console.log('RES: ', s))
+          : console.log(res);
+          return true;
+        })
+        .catch(error =>{
+          console.log(error);
+          return false;
+        })   
     }
 
     userParkingSpaceValidation(cardNumber, userName, userSurname) {
