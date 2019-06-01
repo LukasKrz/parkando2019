@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { withRouter } from "react-router-dom";
 
+import users from '../../mocks/users.js';
 import bigLogo from '../../images/parkando.png';
 
 class LoginPage extends Component {

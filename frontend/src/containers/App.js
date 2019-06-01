@@ -30,7 +30,7 @@ class App extends Component {
   choiceHandler = (number) => {
     this.setState({
       park_place_id: number
-    })
+    });
   }
 
   logUser = (cardNumber, userName, userSurname, userType) => {
@@ -67,6 +67,8 @@ class App extends Component {
       .then(message => {
           this.setState({test: message});
     });
+
+    this.logUser(this.state.card_id, this.state.userName, this.state.userSurname, this.state.user_type)
   }
 
 // componentDidMount() {
@@ -83,10 +85,6 @@ class App extends Component {
 
   render() {
     console.log('TEsT: ', this.state.test);
-    console.log('user type', this.state.user_type);
-
-    const userType = this.state.user_type;
-    
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
@@ -116,7 +114,7 @@ class App extends Component {
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
                   occupiedSpaces={
-                    userType === 'Dzienny'
+                    this.state.user_type === 'Dzienny'
                     ? this.state.occupiedSpacesForDaily
                     : this.state.occupiedSpacesForWeekends
                   }
@@ -130,7 +128,7 @@ class App extends Component {
                   {...props}
                   choiceHandler={this.choiceHandler}
                   occupiedSpaces={
-                    userType === 'Dzienny'
+                    this.state.user_type === 'Dzienny'
                     ? this.state.occupiedSpacesForDaily
                     : this.state.occupiedSpacesForWeekends
                   }
