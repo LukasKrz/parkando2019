@@ -6,6 +6,7 @@ import SpaceInput from './SpaceInput.js';
 
 class ChoicePage extends Component {
     handleClick = (e) => {
+        //TODO POST
         e.preventDefault();
         const number = e.target.id;
         this.props.choiceHandler(number);

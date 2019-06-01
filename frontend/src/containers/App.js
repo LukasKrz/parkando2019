@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch, matchPath} from 'react-router-dom';
+import moment from 'moment';
 
-import history from './history';
+import history from '../modules/history';
 
 import users from '../mocks/users.js';
 
 import LoginPage from '../components/LoginPage/LoginPage';
 import WelcomePage from '../components/WelcomePage/WelcomePage';
-import ChoicePage from '../components/ParkingSpaceChoicePage/ChoicePage';
+import ChoicePage from '../components/ParkingChoicePage/ChoicePage';
 import ParkingChoicePage from '../components/ParkingChoicePage/ParkingChoicePage';
 import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmationPage';
@@ -15,13 +16,15 @@ import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmat
 class App extends Component {
   state = {
     card_id: null,
-    park_place_id: null, // TODO expiration date
+    park_place_id: null,
     user_type: 'Dzienny',
+    expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
     userSurname: '',
     occupiedSpacesForDaily: [],
     occupiedSpacesForWeekends: [],
-    test: []
+    // TODO remove when backend is in
+    test: ''
   }
 
   choiceHandler = (number) => {
@@ -33,13 +36,14 @@ class App extends Component {
   logUser = (cardNumber, userName, userSurname, userType) => {
     this.setState({
       card_id: cardNumber,
+      user_type: userType,
       userName: userName,
-      userSurname: userSurname,
-      user_type: userType
+      userSurname: userSurname
     })
   }
 
   componentWillMount() {
+    // TODO remove when backend is in
     let daily = [];
     let weekends = [];
 
@@ -58,26 +62,27 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://randomuser.me/api/?format=json&results=5")
-      .then(res => res.json())
-      .then(json => this.setState({ test: json.results }));
+    fetch('/api/hello')
+      .then(response => response.text()) // res.json()
+      .then(message => {
+          this.setState({test: message});
+    });
   }
 
-  // componentDidMount() {
-  //     setInterval(this.hello, 250);
-  // }
+// componentDidMount() {
+//     setInterval(this.hello, 250);
+// }
 
-  // hello = () => {
-  // fetch('/api/hello')
-  //  .then(response => response.text())
-  //  .then(message => {
-  //     this.setState({message: message});
-  //   });
-  // };
-
+// hello = () => {
+// fetch('/api/hello')
+//  .then(response => response.text())
+//  .then(message => {
+//     this.setState({message: message});
+//   });
+// };
 
   render() {
-    this.state.test.map(e => console.log(e));      
+    console.log('TEsT: ', this.state.test);  
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
@@ -142,6 +147,7 @@ class App extends Component {
                 userName={this.state.userName}
                 userSurname={this.state.userSurname}
                 userType={this.state.user_type}
+                expirationDate={this.state.expiration_date}
               />
             }
             match={matchPath}

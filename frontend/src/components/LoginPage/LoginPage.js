@@ -21,7 +21,7 @@ class LoginPage extends Component {
     }
     
     messages = {
-      userNameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki i nie może zawierać spacji',
+      userNameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki', // "i nie może zawierać spacji" - info: TEST
       userSurnameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki',
       card_idIncorrect: 'Numer karty musi zawierać 3 cyfry',
       noUserInDB: 'Błędny numer karty lub dane użytkownika',
@@ -42,12 +42,14 @@ class LoginPage extends Component {
     handleSubmit = e => {
       e.preventDefault();
       const validation = this.formValidation();
-      const finddUser = this.finddUser(this.state.card_id, this.state.userName, this.state.userSurname);
+      // TODO probably remove or modified when backend is in
+      const findUser = this.findUser(this.state.card_id, this.state.userName, this.state.userSurname);
       const park_place_id = this.userParkingSpaceValidation(this.state.card_id, this.state.userName, this.state.userSurname);
       const user_type = this.setUserType(this.state.card_id, this.state.userName, this.state.userSurname);
     
       if(validation.correct) {
-        if(finddUser.length > 0) {
+        //TODO GET
+        if(findUser.length > 0) {
           this.setState({
             userName: '',
             userSurname: '',
@@ -98,7 +100,7 @@ class LoginPage extends Component {
       let card_id = false;
       let correct = false;
     
-      if(this.state.userName.length > 3 && this.state.userName.indexOf(' ') === -1) {
+      if(this.state.userName.length > 3) { // && this.state.userName.indexOf(' ') === -1 - info TEST
         userName = true;
       }
       if(this.state.userSurname.length > 3) {
@@ -119,20 +121,23 @@ class LoginPage extends Component {
       })
     }
 
-    finddUser(cardNumber, userName, userSurname) {
+    // TODO findUser, userParkingSpaceValidation, setUserType probably remove or modified when backend is in
+    findUser(cardNumber, userName, userSurname) {
       return this.props.users.filter(user =>
-        user.name === userName && user.surname === userSurname && user.card_id === Number(cardNumber));      
+        user.name.toLowerCase() === userName.toLowerCase()
+        && user.surname.toLowerCase() === userSurname.toLowerCase()
+        && user.card_id === Number(cardNumber));      
     }
 
     userParkingSpaceValidation(cardNumber, userName, userSurname) {
-      const user = this.finddUser(cardNumber, userName, userSurname);
+      const user = this.findUser(cardNumber, userName, userSurname);
       let place = null; 
       user.map(el => place = el.park_place_id)
       return place;
     }
 
     setUserType(cardNumber, userName, userSurname) {
-      const user = this.finddUser(cardNumber, userName, userSurname);
+      const user = this.findUser(cardNumber, userName, userSurname);
       let type = ''; 
       user.map(el => type = el.user_type)
       return type;
