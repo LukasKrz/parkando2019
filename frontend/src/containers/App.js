@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import history from '../modules/history';
 
-import users from '../mocks/users.js';
+// import users from '../mocks/users.js';
 
 import LoginPage from '../components/LoginPage/LoginPage';
 import WelcomePage from '../components/WelcomePage/WelcomePage';
@@ -42,24 +42,24 @@ class App extends Component {
     })
   }
 
-  componentWillMount() {
-    // TODO remove when backend is in
-    let daily = [];
-    let weekends = [];
+  // componentWillMount() {
+  //   // TODO remove when backend is in
+  //   let daily = [];
+  //   let weekends = [];
 
-    users.parkandoUsers.map(a => {
-      if(a.park_place_id !== null) {
-        a.user_type === "Dzienny"
-          ? daily.push(a.park_place_id)
-          : weekends.push(a.park_place_id)
-      }
-    });
+  //   users.parkandoUsers.map(a => {
+  //     if(a.park_place_id !== null) {
+  //       a.user_type === "Dzienny"
+  //         ? daily.push(a.park_place_id)
+  //         : weekends.push(a.park_place_id)
+  //     }
+  //   });
 
-    this.setState({
-      occupiedSpacesForDaily: daily,
-      occupiedSpacesForWeekends: weekends,
-    });
-  }
+  //   this.setState({
+  //     occupiedSpacesForDaily: daily,
+  //     occupiedSpacesForWeekends: weekends,
+  //   });
+  // }
 
   // componentDidMount() {
   //   fetch('/api/hello')
@@ -97,7 +97,7 @@ class App extends Component {
                   {...props}
                   logUser={this.logUser} 
                   match={matchPath}
-                  users={users.parkandoUsers}
+                  // users={users.parkandoUsers}
                 />
             }
             exact 

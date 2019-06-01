@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import {withRouter} from "react-router-dom";
 
-import users from '../../mocks/users.js';
 import bigLogo from '../../images/parkando.png';
 
 class LoginPage extends Component {
@@ -23,7 +22,7 @@ class LoginPage extends Component {
     }
 
     messages = {
-        userNameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki', // "i nie może zawierać spacji" - info: TEST
+        userNameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki',
         userSurnameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki',
         card_idIncorrect: 'Numer karty musi zawierać 3 cyfry',
         noUserInDB: 'Błędny numer karty lub dane użytkownika',
@@ -46,8 +45,6 @@ class LoginPage extends Component {
         const validation = this.formValidation();
 
         if (validation.correct) {
-
-        // let test = null;
             fetch('/api/studenci/walidacja', {
                 method: 'POST',
                 headers: {
@@ -61,62 +58,39 @@ class LoginPage extends Component {
                 })
             }).then(response => response.json())
                 .then(data => {
+                  if(data.card_id !== null) {
                     this.setState({
                         userName: data.name,
                         userSurname: data.surname ,
                         card_id: data.card_id ,
                         user_type: data.user_type,
-                        test: data
-                    })})
-                    // response.text().then(function (data) {
-                    //     const objectResponse = JSON.parse(data);
-                    //     test = objectResponse;
-                    //     // const num = objectResponse.card_id;
-                    //     // console.log('card', objectResponse.card_id);
-                    //     // this.props.logUser(objectResponse.card_id, objectResponse.userName, objectResponse.userSurname);
-                    //     // if (objectResponse) {
-                    //     //     this.setState({
-                    //     //     //     userName: objectResponse ? objectResponse.name : '',
-                    //     //     //     userSurname: objectResponse ? objectResponse.surname : '',
-                    //     //     //     card_id: objectResponse ? objectResponse.card_id : '',
-                    //     //     //     user_type: objectResponse ? objectResponse.user_type : '',
-                    //     //         test: objectResponse
-                    //     //     });
-                    //     // }
-                    //
-                    // })
-                    // console.log('RES: ', response.text());
-                    // this.setState({test: response.card_id});
-                    // })
-                        .catch(error => {
-                            console.log(error);
-                        })
-                // }
+                        test: data,
+                        errors: {
+                          userInDB: false
+                        }
+                    })
 
- // this.setState({test: test});
+                  this.props.logUser(data.card_id, data.name, data.surname, data.user_type);
 
-            // this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname); // dzienny zaoczny?
+                  if(data.park_place_id === null) {
+                    this.props.history.push(`/welcome/${data.card_id}`);
+                  } else {
+                    this.props.history.push(`/final-confirmation/${data.card_id}/${data.park_place_id}`)
+                  }
 
-            //   // this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname);
+                  } else {
+                    this.setState({
+                      errors: {
+                        userInDB: true,
+                      }
+                    })
+                  console.log('NIE MA USERA');  
+                  }
+                })
 
-            //   if(park_place_id === null) {
-            //     this.props.history.push(`/welcome/${this.state.card_id}`);
-            //   } else {
-            //     this.props.history.push(`/final-confirmation/${this.state.card_id}/${park_place_id}`)
-            //   }
-
-            //   this.setState({
-            //     errors: {
-            //       userInDB: false,
-            //     }
-            //   })
-            // } else {
-            //   this.setState({
-            //     errors: {
-            //       userInDB: true,
-            //     }
-            //   })
-            // }
+            .catch(error => {
+              console.log(error);
+            })
         } else {
             this.setState({
                 errors: {
