@@ -58,8 +58,11 @@ class LoginPage extends Component {
             surname: this.state.userSurname
           })
           }).then(response => {
-            console.log('RES: ', response.text());
-            this.setState({test: response});
+            response.text().then(function(data) {
+                console.log(JSON.parse(data));
+            })
+            // console.log('RES: ', response.text());
+            // this.setState({test: response.card_id});
           })
           .catch(error =>{
             console.log(error);
