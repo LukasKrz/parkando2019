@@ -82,7 +82,11 @@ class App extends Component {
 // };
 
   render() {
-    console.log('TEsT: ', this.state.test);  
+    console.log('TEsT: ', this.state.test);
+    console.log('user type', this.state.user_type);
+
+    const userType = this.state.user_type;
+    
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
@@ -112,7 +116,7 @@ class App extends Component {
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
                   occupiedSpaces={
-                    this.state.user_type === 'Dzienny'
+                    userType === 'Dzienny'
                     ? this.state.occupiedSpacesForDaily
                     : this.state.occupiedSpacesForWeekends
                   }
@@ -126,7 +130,7 @@ class App extends Component {
                   {...props}
                   choiceHandler={this.choiceHandler}
                   occupiedSpaces={
-                    this.state.user_type === 'Dzienny'
+                    userType === 'Dzienny'
                     ? this.state.occupiedSpacesForDaily
                     : this.state.occupiedSpacesForWeekends
                   }
