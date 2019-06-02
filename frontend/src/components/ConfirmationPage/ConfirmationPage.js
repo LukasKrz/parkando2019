@@ -14,6 +14,29 @@ class ConfirmationPage extends Component {
     //     })
     //   }
 
+    handleClick = (e) => {
+        e.preventDefault();
+        const number = this.props.match.params.park_place_id;
+        fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                card_id: this.props.cardId,
+            })
+        }).then(response => response.json())
+            .then(data => {
+                this.props.choiceHandler(this.props.match.params.park_place_id);
+                this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${number}`)
+                console.log('WYSŁANE', data);
+            })
+            .catch(error => {
+                console.log('ERROR: ', error);
+            })
+    }
+
     render() {
         // back to this concept when different view for user with parking place from begining
         // const date = moment().format('DD.MM.YYYY');
@@ -26,7 +49,7 @@ class ConfirmationPage extends Component {
                 <div className="confirmation-container__buttons-section buttons-section">
                     <button
                         className="buttons-section__log-out-btn"
-                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${this.props.match.params.park_place_id}`)}}
+                        onClick={this.handleClick}
                     >
                         ZATWIERDŹ
                     </button>
