@@ -17,6 +17,8 @@ class ConfirmationPage extends Component {
     handleClick = (e) => {
         e.preventDefault();
         const number = this.props.match.params.park_place_id;
+        this.props.choiceHandler(this.props.match.params.park_place_id);
+        this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${number}`)
         fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
             method: 'PUT',
             headers: {
@@ -28,8 +30,6 @@ class ConfirmationPage extends Component {
             })
         }).then(response => response.json())
             .then(data => {
-                this.props.choiceHandler(this.props.match.params.park_place_id);
-                this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${number}`)
                 console.log('WYSŁANE', data);
             })
             .catch(error => {
