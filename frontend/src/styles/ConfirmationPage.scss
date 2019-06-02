@@ -22,7 +22,7 @@
         box-sizing: border-box;
         justify-content: space-between;
         padding: 20px 30px;
-        max-width: 300px;
+        max-width: 340px;
     }
 
     .buttons-section {
@@ -32,7 +32,7 @@
             font-weight: 700;
             background-color: #fff;
             border: none;
-            width: 100px;
+            width: 120px;
             outline: none;
             box-sizing: border-box;
             padding: 10px;
@@ -44,12 +44,16 @@
             font-weight: 700;
             color: #fff;
             border: none;
-            width: 100px;
+            width: 120px;
             outline: none;
             box-sizing: border-box;
             padding: 10px;
             margin: 20px auto;
             background-color: #E04436;
+        }
+
+        &__additional-place {
+            width: 120px;
         }
     }
 

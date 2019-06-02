@@ -75,7 +75,7 @@ class LoginPage extends Component {
                   if(data.park_place_id === null) {
                     this.props.history.push(`/welcome/${data.card_id}`);
                   } else {
-                    this.props.history.push(`/final-confirmation/${data.card_id}/${data.park_place_id}`)
+                    this.props.history.push(`/final-confirmation/${data.card_id}/0/${data.park_place_id}`)
                   }
 
                   } else {

@@ -13,6 +13,10 @@ import ParkingChoicePage from '../components/ParkingChoicePage/ParkingChoicePage
 import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmationPage';
 
+import FinalConfirmationWithTwoReservation from '../components/ConfirmationPage/FinalConfirmationWithTwoReservation';
+import DayChoicePage from '../components/DayChoicePage/DayChoicePage';
+
+
 class App extends Component {
   state = {
     card_id: null,
@@ -60,7 +64,7 @@ class App extends Component {
             render={(props) => <WelcomePage {...props} userName={this.state.userName} />}
           />
           <Route
-            path='/choicePaking/:card_id'
+            path='/choicePaking/:card_id/:extra_place'
             render={
               (props) =>
                 <ParkingChoicePage
@@ -70,7 +74,7 @@ class App extends Component {
                 />}
           />
           <Route
-            path='/choice/:card_id'
+            path='/choice/:card_id/:extra_place'
             render={
               (props) =>
                 <ChoicePage
@@ -82,13 +86,13 @@ class App extends Component {
             }
           />
           <Route
-            path="/confirmation/:card_id/:park_place_id"
+            path="/confirmation/:card_id/:extra_place/:park_place_id"
             render={(props) => <ConfirmationPage {...props} choiceHandler={this.choiceHandler} userType={this.state.user_type} cardId={this.state.card_id}
             userName={this.state.userName} userSurname={this.state.userSurname} />}
             match={matchPath}
           />
           <Route
-            path="/final-confirmation/:card_id/:park_place_id"
+            path="/final-confirmation/:card_id/:extra_place/:park_place_id"
             render={
               (props) =>
               <FinalConfirmationPage
@@ -97,6 +101,32 @@ class App extends Component {
                 userSurname={this.state.userSurname}
                 userType={this.state.user_type}
                 expirationDate={this.state.expiration_date}
+              />
+            }
+            match={matchPath}
+          />
+            <Route
+            path="/day-choice/:card_id"
+            render={
+              (props) =>
+              <DayChoicePage
+                {...props}
+                userType={this.state.user_type}
+              />
+            }
+            match={matchPath}
+          />
+          <Route
+            path="/two-reservation/:card_id/:extra_place/:park_place_id"
+            render={
+              (props) =>
+              <FinalConfirmationWithTwoReservation
+                {...props}
+                userName={this.state.userName}
+                userSurname={this.state.userSurname}
+                userType={this.state.user_type}
+                expirationDate={this.state.expiration_date}
+                placeId={this.state.park_place_id}
               />
             }
             match={matchPath}

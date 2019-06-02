@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
 
 import { withRouter } from "react-router-dom";
-// import moment from 'moment';
 
 class ConfirmationPage extends Component {
-    // state = {
-    //     confirm: false,
-    // }
-
-    // setConfirm = () => {
-    //     this.setState({
-    //       confirm: true
-    //     })
-    //   }
+    // PUT na miejsce!
 
     handleClick = (e) => {
         e.preventDefault();
         const number = this.props.match.params.park_place_id;
-        this.props.choiceHandler(this.props.match.params.park_place_id);
+        Number(this.props.match.params.extra_place) === 0 && this.props.choiceHandler(number);
         console.log('test', number);
-        this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${number}`)
+        this.props.history.push(
+            Number(this.props.match.params.extra_place) === 0
+            ? `/final-confirmation/${this.props.match.params.card_id}/${this.props.match.params.extra_place}/${number}`
+            : `/two-reservation/${this.props.match.params.card_id}/${this.props.match.params.extra_place}/${number}`
+        )
         fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
             method: 'PUT',
             headers: {
@@ -39,10 +34,6 @@ class ConfirmationPage extends Component {
     }
 
     render() {
-        // back to this concept when different view for user with parking place from begining
-        // const date = moment().format('DD.MM.YYYY');
-        // const userName = this.props.userName;
-        // const userSurname = this.props.userSurname;    
         return (
             <section className="confirmation-container">
                 Wybrałeś miejsce:
