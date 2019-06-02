@@ -40,23 +40,23 @@ class App extends Component {
     })
   }
 
-componentWillMount() {
-  const type = this.state.user_type.toLowerCase();
-  fetch(`miejsca/dostepnepodstawowe/${type}`)
-  .then(response => response.json())
-    .then(data => {
-      console.log('TYP: ', type);
-      console.log('LISTA: ', data);
-      let emptySpaces = [];
-      data.map(a => emptySpaces.push(a.parkPlaceId))
-      console.log('WYBRANE: ', emptySpaces);
+// componentWillMount() {
+//   const type = this.state.user_type.toLowerCase();
+//   fetch(`miejsca/dostepnepodstawowe/${type}`)
+//   .then(response => response.json())
+//     .then(data => {
+//       console.log('TYP: ', type);
+//       console.log('LISTA: ', data);
+//       let emptySpaces = [];
+//       data.map(a => emptySpaces.push(a.parkPlaceId))
+//       console.log('WYBRANE: ', emptySpaces);
       
-      type === 'dzienne'
-      ? 
-      this.setState({emptySpacesForDaily: emptySpaces})
-      : this.setState({emptySpacesForWeekends: emptySpaces})
-    })
-}
+//       type === 'dzienne'
+//       ? 
+//       this.setState({emptySpacesForDaily: emptySpaces})
+//       : this.setState({emptySpacesForWeekends: emptySpaces})
+//     })
+// }
 
 // hello = () => {
 // fetch('/api/hello')
@@ -109,6 +109,7 @@ componentWillMount() {
                 <ChoicePage
                   {...props}
                   choiceHandler={this.choiceHandler}
+                  userType={this.state.user_type}
                   emptySpaces={
                     this.state.user_type === 'dzienne'
                     ? this.state.emptySpacesForDaily

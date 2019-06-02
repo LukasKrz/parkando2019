@@ -5,6 +5,10 @@ import { withRouter } from "react-router-dom";
 import SpaceInput from './SpaceInput.js';
 
 class ChoicePage extends Component {
+    state = {
+        emptySpaces: []
+    }
+
     handleClick = (e) => {
         //TODO POST
         e.preventDefault();
@@ -18,10 +22,26 @@ class ChoicePage extends Component {
         }        
     }
 
+    componentWillMount() {
+        // const type = this.state.user_type.toLowerCase();
+        fetch(`miejsca/dostepnepodstawowe/${this.props.userType}`)
+        .then(response => response.json())
+          .then(data => {
+            console.log('TYP: ', this.props.userType);
+            console.log('LISTA: ', data);
+            let emptySpacesFromBack = [];
+            data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+            console.log('WYBRANE: ', emptySpacesFromBack);
+ 
+            this.setState({emptySpaces: emptySpacesFromBack});
+          })
+      }
+
     checkIfParkingIsOccupied = (number) => {
         console.log('NUM: ', number);
         
-        return this.props.emptySpaces.some(space => space !== number);
+        // return this.props.emptySpaces.some(space => space !== number);
+        return !this.state.emptySpaces.some(space => space === number);
     }
 
     render() {
