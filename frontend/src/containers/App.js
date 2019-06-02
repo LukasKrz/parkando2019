@@ -17,14 +17,12 @@ class App extends Component {
   state = {
     card_id: null,
     park_place_id: null,
-    user_type: 'Dzienne',
+    user_type: '',
     expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
     userSurname: '',
-    occupiedSpacesForDaily: [],
-    occupiedSpacesForWeekends: [],
-    // TODO remove when backend is in
-    test: ''
+    emptySpacesForDaily: [],
+    emptySpacesForWeekends: [],
   }
 
   choiceHandler = (number) => {
@@ -42,27 +40,21 @@ class App extends Component {
     })
   }
 
-  // componentWillMount() {
-  //   // TODO remove when backend is in
-  //   let daily = [];
-  //   let weekends = [];
-
-
-componentDidMount() {
+componentWillMount() {
   const type = this.state.user_type.toLowerCase();
   fetch(`miejsca/dostepnepodstawowe/${type}`)
   .then(response => response.json())
     .then(data => {
       console.log('TYP: ', type);
       console.log('LISTA: ', data);
-      let occupiedSpaces = [];
-      data.map(a => occupiedSpaces.push(a.parkPlaceId))
-      console.log('WYBRANE: ', occupiedSpaces);
+      let emptySpaces = [];
+      data.map(a => emptySpaces.push(a.parkPlaceId))
+      console.log('WYBRANE: ', emptySpaces);
       
       type === 'dzienne'
       ? 
-      this.setState({occupiedSpacesForDaily: occupiedSpaces})
-      : this.setState({occupiedSpacesForWeekends: occupiedSpaces})
+      this.setState({emptySpacesForDaily: emptySpaces})
+      : this.setState({emptySpacesForWeekends: emptySpaces})
     })
 }
 
@@ -88,7 +80,6 @@ componentDidMount() {
                   {...props}
                   logUser={this.logUser} 
                   match={matchPath}
-                  // users={users.parkandoUsers}
                 />
             }
             exact 
@@ -104,10 +95,10 @@ componentDidMount() {
                 <ParkingChoicePage
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
-                  occupiedSpaces={
-                    this.state.user_type === 'Dzienne'
-                    ? this.state.occupiedSpacesForDaily
-                    : this.state.occupiedSpacesForWeekends
+                  emptySpaces={
+                    this.state.user_type === 'dzienne'
+                    ? this.state.emptySpacesForDaily
+                    : this.state.emptySpacesForWeekends
                   }
                 />}
           />
@@ -118,10 +109,10 @@ componentDidMount() {
                 <ChoicePage
                   {...props}
                   choiceHandler={this.choiceHandler}
-                  occupiedSpaces={
-                    this.state.user_type === 'Dzienne'
-                    ? this.state.occupiedSpacesForDaily
-                    : this.state.occupiedSpacesForWeekends
+                  emptySpaces={
+                    this.state.user_type === 'dzienne'
+                    ? this.state.emptySpacesForDaily
+                    : this.state.emptySpacesForWeekends
                   }
                 />
             }

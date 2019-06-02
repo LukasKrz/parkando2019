@@ -21,7 +21,7 @@ class ChoicePage extends Component {
     checkIfParkingIsOccupied = (number) => {
         console.log('NUM: ', number);
         
-        return this.props.occupiedSpaces.some(space => space !== number);
+        return this.props.emptySpaces.some(space => space !== number);
     }
 
     render() {
@@ -30,43 +30,43 @@ class ChoicePage extends Component {
                 <div className="choice-page-container__map-details map-details">
                     <SpaceInput
                         number={7}
-                        occupiedSpaces={this.props.occupiedSpaces}
+                        emptySpaces={this.props.emptySpaces}
                         handleClick={this.handleClick}
                         occupied={this.checkIfParkingIsOccupied(7)}
                     />
                     <SpaceInput
                         number={6}
-                        occupiedSpaces={this.props.occupiedSpaces}
+                        emptySpaces={this.props.emptySpaces}
                         handleClick={this.handleClick}
                         occupied={this.checkIfParkingIsOccupied(6)}
                     />
                     <SpaceInput
                         number={5}
-                        occupiedSpaces={this.props.occupiedSpaces}
+                        emptySpaces={this.props.emptySpaces}
                         handleClick={this.handleClick}
                         occupied={this.checkIfParkingIsOccupied(5)}
                     />
                     <SpaceInput
                         number={4}
-                        occupiedSpaces={this.props.occupiedSpaces}
+                        emptySpaces={this.props.emptySpaces}
                         handleClick={this.handleClick}
                         occupied={this.checkIfParkingIsOccupied(4)}
                     />
                     <SpaceInput
                         number={3}
-                        occupiedSpaces={this.props.occupiedSpaces}
+                        emptySpaces={this.props.emptySpaces}
                         handleClick={this.handleClick}
                         occupied={this.checkIfParkingIsOccupied(3)}
                     />
                     <SpaceInput
                         number={2}
-                        occupiedSpaces={this.props.occupiedSpaces}
+                        emptySpaces={this.props.emptySpaces}
                         handleClick={this.handleClick}
                         occupied={this.checkIfParkingIsOccupied(2)}
                     />
                     <SpaceInput
                         number={1}
-                        occupiedSpaces={this.props.occupiedSpaces}
+                        emptySpaces={this.props.emptySpaces}
                         handleClick={this.handleClick}
                         occupied={this.checkIfParkingIsOccupied(1)}
                     />
