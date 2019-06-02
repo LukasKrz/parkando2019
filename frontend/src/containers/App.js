@@ -33,12 +33,13 @@ class App extends Component {
     });
   }
 
-  logUser = (cardNumber, userName, userSurname, userType) => {
+  logUser = (cardNumber, userName, userSurname, userType, placeId) => {
     this.setState({
       card_id: cardNumber,
       user_type: userType,
       userName: userName,
-      userSurname: userSurname
+      userSurname: userSurname,
+      park_place_id: placeId
     })
   }
 

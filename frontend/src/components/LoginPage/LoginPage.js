@@ -61,8 +61,8 @@ class LoginPage extends Component {
                   if(data.card_id !== null) {
                     this.setState({
                         userName: data.name,
-                        userSurname: data.surname ,
-                        card_id: data.card_id ,
+                        userSurname: data.surname,
+                        card_id: data.card_id,
                         user_type: data.user_type,
                         test: data,
                         errors: {
@@ -70,7 +70,7 @@ class LoginPage extends Component {
                         }
                     })
 
-                  this.props.logUser(data.card_id, data.name, data.surname, data.user_type);
+                  this.props.logUser(data.card_id, data.name, data.surname, data.user_type, data.park_place_id);
 
                   if(data.park_place_id === null) {
                     this.props.history.push(`/welcome/${data.card_id}`);
