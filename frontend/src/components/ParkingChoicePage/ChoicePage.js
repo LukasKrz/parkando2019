@@ -46,7 +46,6 @@ class ChoicePage extends Component {
     }
 
     componentWillMount() {
-        // const type = this.state.user_type.toLowerCase();
         fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
         .then(response => response.json())
           .then(data => {
@@ -58,12 +57,14 @@ class ChoicePage extends Component {
  
             this.setState({emptySpaces: emptySpacesFromBack});
           })
+        this.getEmptyExtraPlaces(1);
       }
 
     checkIfParkingIsOccupied = (number) => {
-        console.log('NUM: ', number);
-        
+        // console.log('NUM: ', number);
         // return this.props.emptySpaces.some(space => space !== number);
+        console.log('EXTRA: ', this.state.extraSpaces);
+        
         return Number(this.props.match.params.extra_place) === 0
         ? !this.state.emptySpaces.some(space => space === number)
         : !this.state.extraSpaces.some(space => space === number)
@@ -105,8 +106,7 @@ class ChoicePage extends Component {
     render() {
         return (
             <section className="choice-page-container">
-            {Number(this.props.match.params.extra_place) === 0
-                ? <div className="choice-page-container__map-details map-details">
+                <div className="choice-page-container__map-details map-details">
                     <SpaceInput
                         number={7}
                         occupiedSpaces={this.props.occupiedSpaces}
@@ -149,8 +149,6 @@ class ChoicePage extends Component {
                         handleClick={this.handleClick}
                         occupied={this.checkIfParkingIsOccupied(1)}
                     />
-                </div>
-                : <div className="choice-page-container__map-details map-details map-details--extra-places">
                     <SpaceInput
                         number={8}
                         occupiedSpaces={this.props.occupiedSpaces}
@@ -170,8 +168,6 @@ class ChoicePage extends Component {
                         occupied={this.checkIfParkingIsOccupied(10)}
                     />
                 </div>
-            }
-
         </section>
         )
     }
