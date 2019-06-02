@@ -8,7 +8,8 @@ import SpaceInput from './SpaceInput.js';
 
 class ChoicePage extends Component {
     state = {
-        emptySpaces: []
+        emptySpaces: [],
+        extraSpaces: []
     }
 
     handleClick = (e) => {
@@ -49,7 +50,7 @@ class ChoicePage extends Component {
         fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
         .then(response => response.json())
           .then(data => {
-            console.log('TYP: ', this.props.userType);
+            // console.log('TYP: ', this.props.userType);
             console.log('LISTA: ', data);
             let emptySpacesFromBack = [];
             data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
@@ -63,39 +64,42 @@ class ChoicePage extends Component {
         console.log('NUM: ', number);
         
         // return this.props.emptySpaces.some(space => space !== number);
-        return !this.state.emptySpaces.some(space => space === number);
+        return Number(this.props.match.params.extra_place) === 0
+        ? !this.state.emptySpaces.some(space => space === number)
+        : !this.state.extraSpaces.some(space => space === number)
     }
 
-    getOccupiedPlaces = (day) => {
-        let occupiedExtraSpaces;
+    getEmptyExtraPlaces = (day) => {
+        let emptyExtraSpaces;
         switch(day) {
             case 1: 
-                occupiedExtraSpaces = dayPlacesMap.pon;
+                emptyExtraSpaces = dayPlacesMap.pon;
                 break;
             case 2:
-                occupiedExtraSpaces = dayPlacesMap.wt;
+                emptyExtraSpaces = dayPlacesMap.wt;
                 break;
             case 3:
-                occupiedExtraSpaces = dayPlacesMap.sr;
+                emptyExtraSpaces = dayPlacesMap.sr;
                 break;
             case 4:
-                occupiedExtraSpaces = dayPlacesMap.czw;
+                emptyExtraSpaces = dayPlacesMap.czw;
                 break;
             case 5:
-                occupiedExtraSpaces = dayPlacesMap.pt;
+                emptyExtraSpaces = dayPlacesMap.pt;
                 break;
             case 6:
-                occupiedExtraSpaces = dayPlacesMap.sob;
+                emptyExtraSpaces = dayPlacesMap.sob;
                 break;
             case 7:
-                occupiedExtraSpaces = dayPlacesMap.niedz;
+                emptyExtraSpaces = dayPlacesMap.niedz;
                 break;
             default:
-                occupiedExtraSpaces = [];
+                emptyExtraSpaces = [];
                 break;
         }
 
-        return occupiedExtraSpaces;
+        this.setState({extraSpaces: emptyExtraSpaces});
+        return emptyExtraSpaces;
     }
 
     render() {

@@ -29,41 +29,41 @@ class ParkingChoicePage extends Component {
           })
       }
 
-      getOccupiedPlaces = (day) => {
-        let occupiedExtraSpaces;
+      getEmptyExtraPlaces = (day) => {
+        let emptyExtraSpaces;
         switch(day) {
             case 1: 
-                occupiedExtraSpaces = dayPlacesMap.pon;
+                emptyExtraSpaces = dayPlacesMap.pon;
                 break;
             case 2:
-                occupiedExtraSpaces = dayPlacesMap.wt;
+                emptyExtraSpaces = dayPlacesMap.wt;
                 break;
             case 3:
-                occupiedExtraSpaces = dayPlacesMap.sr;
+                emptyExtraSpaces = dayPlacesMap.sr;
                 break;
             case 4:
-                occupiedExtraSpaces = dayPlacesMap.czw;
+                emptyExtraSpaces = dayPlacesMap.czw;
                 break;
             case 5:
-                occupiedExtraSpaces = dayPlacesMap.pt;
+                emptyExtraSpaces = dayPlacesMap.pt;
                 break;
             case 6:
-                occupiedExtraSpaces = dayPlacesMap.sob;
+                emptyExtraSpaces = dayPlacesMap.sob;
                 break;
             case 7:
-                occupiedExtraSpaces = dayPlacesMap.niedz;
+                emptyExtraSpaces = dayPlacesMap.niedz;
                 break;
             default:
-                occupiedExtraSpaces = [];
+                emptyExtraSpaces = [];
                 break;
         }
         
-        return occupiedExtraSpaces;
+        return emptyExtraSpaces;
     }
 
     render() {
-        const occupiedSpaces = this.getOccupiedPlaces(Number(this.props.match.params.extra_place));
-        console.log('occupiedSpaces: ', occupiedSpaces);
+        const emptyExtra = this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place));
+        console.log('emptyExtra: ', emptyExtra);
         
         return (
             <section className="parking-choice-container">
@@ -72,8 +72,7 @@ class ParkingChoicePage extends Component {
                         <span className="parking-btn__number">{
                             Number(this.props.match.params.extra_place) === 0
                             ? this.state.emptySpaces.length
-                            : 3 - occupiedSpaces.length
-                            
+                            : emptyExtra.length  
                             }</span>
                         <img src={emptyPin} alt='pin wyboru parkingu' />
                     </button>
