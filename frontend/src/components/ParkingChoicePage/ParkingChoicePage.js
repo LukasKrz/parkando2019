@@ -16,15 +16,15 @@ class ParkingChoicePage extends Component {
 
     componentWillMount() {
         // const type = this.state.user_type.toLowerCase();
-        fetch(`miejsca/dostepnepodstawowe/${this.props.userType}`)
+        fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
         .then(response => response.json())
           .then(data => {
             console.log('TYP: ', this.props.userType);
             console.log('LISTA: ', data);
             let emptySpacesFromBack = [];
-            data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+            data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
             console.log('WYBRANE: ', emptySpacesFromBack);
- 
+
             this.setState({emptySpaces: emptySpacesFromBack});
           })
       }
@@ -34,7 +34,7 @@ class ParkingChoicePage extends Component {
             <section className="parking-choice-container">
                 <div className="parking-choice-container__map map">
                     <button className="map__parking-btn parking-btn parking-btn--active parking-btn--active-1" id={1} onClick={this.handleClick}>
-                        <span className="parking-btn__number">{7 - this.state.emptySpaces.length}</span>
+                        <span className="parking-btn__number">{this.state.emptySpaces.length}</span>
                         <img src={emptyPin} alt='pin wyboru parkingu' />
                     </button>
                     <button className="map__parking-btn parking-btn parking-btn--disabled parking-btn--disabled-1" id={2}>
