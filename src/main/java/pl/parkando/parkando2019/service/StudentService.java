@@ -60,6 +60,11 @@ public class StudentService {
         studentZwalidowanyDO.setSurname(studentDoWalidacjiDO.getSurname());
         studentZwalidowanyDO.setUser_type(studentFromDb.getUserType());
         List<MiejscePodstawowe> miejscaPodstawowe = miejsceService.listPodstawowe();
+        checkAndFillMiejscePodstawowe(studentDoWalidacjiDO, studentZwalidowanyDO, miejscaPodstawowe);
+        return studentZwalidowanyDO;
+    }
+
+    private void checkAndFillMiejscePodstawowe(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejscePodstawowe> miejscaPodstawowe) {
         if (studentZwalidowanyDO.getUser_type().equals("dzienne")) {
             if (hasStudentDziennyMiejscePodstawowe(studentDoWalidacjiDO, miejscaPodstawowe)) {
                 studentZwalidowanyDO.setPark_place_id(miejscaPodstawowe.stream()
@@ -74,7 +79,6 @@ public class StudentService {
                 studentZwalidowanyDO.setPark_id("A");
             }
         }
-        return studentZwalidowanyDO;
     }
 
     private Student retrieveStudentFromDb(StudentDoWalidacjiDO studentDoWalidacjiDO) {

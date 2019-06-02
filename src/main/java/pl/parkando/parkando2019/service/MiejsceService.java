@@ -3,9 +3,10 @@ package pl.parkando.parkando2019.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.parkando.parkando2019.model.CardIdDO;
-import pl.parkando.parkando2019.model.MiejsceDodatkowe;
+import pl.parkando.parkando2019.model.MiejsceDodatkoweDzienne;
 import pl.parkando.parkando2019.model.MiejscePodstawowe;
-import pl.parkando.parkando2019.repository.MiejsceDodatkoweRepository;
+import pl.parkando.parkando2019.repository.MiejsceDodatkoweDzienneRepository;
+import pl.parkando.parkando2019.repository.MiejsceDodatkoweZaoczneRepository;
 import pl.parkando.parkando2019.repository.MiejscePodstawoweRepository;
 
 import java.time.LocalDate;
@@ -17,7 +18,10 @@ import java.util.stream.Collectors;
 public class MiejsceService {
 
     @Autowired
-    private MiejsceDodatkoweRepository miejsceDodatkoweRepository;
+    private MiejsceDodatkoweDzienneRepository miejsceDodatkoweDzienneRepository;
+
+    @Autowired
+    private MiejsceDodatkoweZaoczneRepository miejsceDodatkoweZaoczneRepository;
 
     @Autowired
     private MiejscePodstawoweRepository miejscePodstawoweRepository;
@@ -32,14 +36,14 @@ public class MiejsceService {
                 .filter(miejscePodstawowe -> miejscePodstawowe.getDataRezerwacjiZaoczny().isBefore(LocalDate.now().minusDays(7L))).collect(Collectors.toList());
     }
 
-    public List<MiejsceDodatkowe> listDostepneDodatkoweD() {
-        return miejsceDodatkoweRepository.findAll().stream()
-                .filter(miejscePodstawowe -> miejscePodstawowe.getDataRezerwacjiDzienny().isBefore(LocalDate.now().minusDays(7L))).collect(Collectors.toList());
+    public List<MiejsceDodatkoweDzienne> listDostepneDodatkoweD() {
+        return miejsceDodatkoweDzienneRepository.findAll().stream()
+                .filter(miejscePodstawowe -> miejscePodstawowe.getReservationDatePoniedzialek().isBefore(LocalDate.now().minusDays(7L))).collect(Collectors.toList());
     }
 
-    public List<MiejsceDodatkowe> listDostepneDodatkoweZ() {
-        return miejsceDodatkoweRepository.findAll().stream()
-                .filter(miejscePodstawowe -> miejscePodstawowe.getDataRezerwacjiZaoczny().isBefore(LocalDate.now().minusDays(7L))).collect(Collectors.toList());
+    public List<MiejsceDodatkoweDzienne> listDostepneDodatkoweZ() {
+        return miejsceDodatkoweDzienneRepository.findAll().stream()
+                .filter(miejscePodstawowe -> miejscePodstawowe.getReservationDateWtorek().isBefore(LocalDate.now().minusDays(7L))).collect(Collectors.toList());
     }
 
     public MiejscePodstawowe bookPodstawoweD(Long id, CardIdDO cardIdDO) {
@@ -56,25 +60,25 @@ public class MiejsceService {
         return miejscePodstawoweRepository.saveAndFlush(existingMiejsce.get());
     }
 
-    public MiejsceDodatkowe bookDodatkoweD(Long id, CardIdDO cardIdDO) {
-        Optional<MiejsceDodatkowe> existingMiejsce = miejsceDodatkoweRepository.findById(id);
-        existingMiejsce.get().setIdStudentDzienny(cardIdDO.getCard_id());
-        existingMiejsce.get().setDataRezerwacjiDzienny(LocalDate.now());
-        return miejsceDodatkoweRepository.saveAndFlush(existingMiejsce.get());
+    public MiejsceDodatkoweDzienne bookDodatkoweD(Long id, CardIdDO cardIdDO) {
+        Optional<MiejsceDodatkoweDzienne> existingMiejsce = miejsceDodatkoweDzienneRepository.findById(id);
+        existingMiejsce.get().setStudentCardIdPoniedzialek(cardIdDO.getCard_id());
+        existingMiejsce.get().setReservationDatePoniedzialek(LocalDate.now());
+        return miejsceDodatkoweDzienneRepository.saveAndFlush(existingMiejsce.get());
     }
 
-    public MiejsceDodatkowe bookDodatkoweZ(Long id, CardIdDO cardIdDO) {
-        Optional<MiejsceDodatkowe> existingMiejsce = miejsceDodatkoweRepository.findById(id);
-        existingMiejsce.get().setIdStudentZaoczny(cardIdDO.getCard_id());
-        existingMiejsce.get().setDataRezerwacjiZaoczny(LocalDate.now());
-        return miejsceDodatkoweRepository.saveAndFlush(existingMiejsce.get());
+    public MiejsceDodatkoweDzienne bookDodatkoweZ(Long id, CardIdDO cardIdDO) {
+        Optional<MiejsceDodatkoweDzienne> existingMiejsce = miejsceDodatkoweDzienneRepository.findById(id);
+        existingMiejsce.get().setStudentCardIdWtorek(cardIdDO.getCard_id());
+        existingMiejsce.get().setReservationDateWtorek(LocalDate.now());
+        return miejsceDodatkoweDzienneRepository.saveAndFlush(existingMiejsce.get());
     }
 
     public List<MiejscePodstawowe> listPodstawowe() {
         return miejscePodstawoweRepository.findAll();
     }
 
-    public List<MiejsceDodatkowe> listDodatkowe() {
-        return miejsceDodatkoweRepository.findAll();
+    public List<MiejsceDodatkoweDzienne> listDodatkowe() {
+        return miejsceDodatkoweDzienneRepository.findAll();
     }
 }

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.parkando.parkando2019.model.MiejsceDodatkowe;
-import pl.parkando.parkando2019.repository.MiejsceDodatkoweRepository;
+import pl.parkando.parkando2019.model.MiejsceDodatkoweDzienne;
+import pl.parkando.parkando2019.repository.MiejsceDodatkoweDzienneRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,34 +18,34 @@ import java.util.Optional;
 public class MiejscaDodatkoweController {
 
     @Autowired
-    private MiejsceDodatkoweRepository miejsceDodatkoweRepository;
+    private MiejsceDodatkoweDzienneRepository miejsceDodatkoweDzienneRepository;
 
     @RequestMapping(value = "miejsca/dodatkowe", method = RequestMethod.GET)
-    public List<MiejsceDodatkowe> list() {
-        return miejsceDodatkoweRepository.findAll();
+    public List<MiejsceDodatkoweDzienne> list() {
+        return miejsceDodatkoweDzienneRepository.findAll();
     }
 
     @RequestMapping(value = "miejsca/dodatkowe", method = RequestMethod.POST)
-    public MiejsceDodatkowe create(@RequestBody MiejsceDodatkowe miejsce) {
-        return miejsceDodatkoweRepository.saveAndFlush(miejsce);
+    public MiejsceDodatkoweDzienne create(@RequestBody MiejsceDodatkoweDzienne miejsce) {
+        return miejsceDodatkoweDzienneRepository.saveAndFlush(miejsce);
     }
 
     @RequestMapping(value = "miejsca/dodatkowe/{id}", method = RequestMethod.GET)
-    public Optional<MiejsceDodatkowe> get(@PathVariable Long id) {
-        return miejsceDodatkoweRepository.findById(id);
+    public Optional<MiejsceDodatkoweDzienne> get(@PathVariable Long id) {
+        return miejsceDodatkoweDzienneRepository.findById(id);
     }
 
     @RequestMapping(value = "miejsca/dodatkowe/{id}", method = RequestMethod.PUT)
-    public MiejsceDodatkowe update(@PathVariable Long id, @RequestBody MiejsceDodatkowe miejsce) {
-        Optional<MiejsceDodatkowe> existingMiejsce = miejsceDodatkoweRepository.findById(id);
+    public MiejsceDodatkoweDzienne update(@PathVariable Long id, @RequestBody MiejsceDodatkoweDzienne miejsce) {
+        Optional<MiejsceDodatkoweDzienne> existingMiejsce = miejsceDodatkoweDzienneRepository.findById(id);
         BeanUtils.copyProperties(miejsce, existingMiejsce);
-        return miejsceDodatkoweRepository.saveAndFlush(existingMiejsce.get());
+        return miejsceDodatkoweDzienneRepository.saveAndFlush(existingMiejsce.get());
     }
 
     @RequestMapping(value = "miejsca/dodatkowe/{id}", method = RequestMethod.DELETE)
-    public MiejsceDodatkowe delete(@PathVariable Long id) {
-        Optional<MiejsceDodatkowe> existingMiejsce = miejsceDodatkoweRepository.findById(id);
-        miejsceDodatkoweRepository.delete(existingMiejsce.get());
+    public MiejsceDodatkoweDzienne delete(@PathVariable Long id) {
+        Optional<MiejsceDodatkoweDzienne> existingMiejsce = miejsceDodatkoweDzienneRepository.findById(id);
+        miejsceDodatkoweDzienneRepository.delete(existingMiejsce.get());
         return existingMiejsce.get();
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.parkando.parkando2019.model.CardIdDO;
-import pl.parkando.parkando2019.model.MiejsceDodatkowe;
+import pl.parkando.parkando2019.model.MiejsceDodatkoweDzienne;
 import pl.parkando.parkando2019.model.MiejscePodstawowe;
 import pl.parkando.parkando2019.service.MiejsceService;
 
@@ -31,12 +31,12 @@ public class MiejscaController {
     }
 
     @RequestMapping(value = "miejsca/dostepnedodatkowe/dzienne", method = RequestMethod.GET)
-    public List<MiejsceDodatkowe> listDostepneDodatkoweD() {
+    public List<MiejsceDodatkoweDzienne> listDostepneDodatkoweD() {
         return miejsceService.listDostepneDodatkoweD();
     }
 
     @RequestMapping(value = "miejsca/dostepnedodatkowe/zaoczne", method = RequestMethod.GET)
-    public List<MiejsceDodatkowe> listDostepneDodatkoweZ() {
+    public List<MiejsceDodatkoweDzienne> listDostepneDodatkoweZ() {
         return miejsceService.listDostepneDodatkoweZ();
     }
 
@@ -51,12 +51,12 @@ public class MiejscaController {
     }
 
     @RequestMapping(value = "miejsca/rezerwacjadodatkowe/dzienne/{id}", method = RequestMethod.PUT)
-    public MiejsceDodatkowe bookDodatkoweD(@PathVariable Long id, @RequestBody CardIdDO cardIdDO) {
+    public MiejsceDodatkoweDzienne bookDodatkoweD(@PathVariable Long id, @RequestBody CardIdDO cardIdDO) {
         return miejsceService.bookDodatkoweD(id, cardIdDO);
     }
 
     @RequestMapping(value = "miejsca/rezerwacjadodatkowe/zaoczne/{id}", method = RequestMethod.PUT)
-    public MiejsceDodatkowe bookDodatkoweZ(@PathVariable Long id, @RequestBody CardIdDO cardIdDO) {
+    public MiejsceDodatkoweDzienne bookDodatkoweZ(@PathVariable Long id, @RequestBody CardIdDO cardIdDO) {
         return miejsceService.bookDodatkoweZ(id, cardIdDO);
     }
 
@@ -66,7 +66,7 @@ public class MiejscaController {
     }
 
     @RequestMapping(value = "miejsca/dodatkoweall", method = RequestMethod.GET)
-    public List<MiejsceDodatkowe> listDodatkowe() {
+    public List<MiejsceDodatkoweDzienne> listDodatkowe() {
         return miejsceService.listDodatkowe();
     }
 }

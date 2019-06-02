@@ -17,12 +17,28 @@ CREATE TABLE MIEJSCEPODSTAWOWE (
   dataRezerwacjiZaoczny DATE
 );
 
-CREATE TABLE MIEJSCEDODATKOWE (
+CREATE TABLE MIEJSCEDODATKOWEDZIENNE (
   id INT AUTO_INCREMENT,
   parkId VARCHAR(5),
   parkPlaceId INT,
-  idStudentDzienny INT,
-  dataRezerwacjiDzienny DATE,
-  idStudentZaoczny INT,
-  dataRezerwacjiZaoczny DATE
+  studentCardIdPoniedzialek INT,
+  reservationDatePoniedzialek DATE,
+  studentCardIdWtorek INT,
+  reservationDateWtorek DATE,
+  studentCardIdSroda INT,
+  reservationDateSroda DATE,
+  studentCardIdCzwartek INT,
+  reservationDateCzwartek DATE,
+  studentCardIdPiatek INT,
+  reservationDatePiatek DATE
+);
+
+CREATE TABLE MIEJSCEDODATKOWEZAOCZNE (
+  id INT AUTO_INCREMENT,
+  parkId VARCHAR(5),
+  parkPlaceId INT,
+  studentCardIdSobota INT,
+  reservationDateSobota DATE,
+  studentCardIdNiedziela INT,
+  reservationDateNiedziela DATE
 );
