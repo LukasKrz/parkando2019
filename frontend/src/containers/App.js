@@ -20,9 +20,7 @@ class App extends Component {
     user_type: '',
     expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
-    userSurname: '',
-    emptySpacesForDaily: [],
-    emptySpacesForWeekends: [],
+    userSurname: ''
   }
 
   choiceHandler = (number) => {
@@ -40,34 +38,7 @@ class App extends Component {
     })
   }
 
-// componentWillMount() {
-//   const type = this.state.user_type.toLowerCase();
-//   fetch(`miejsca/dostepnepodstawowe/${type}`)
-//   .then(response => response.json())
-//     .then(data => {
-//       console.log('TYP: ', type);
-//       console.log('LISTA: ', data);
-//       let emptySpaces = [];
-//       data.map(a => emptySpaces.push(a.parkPlaceId))
-//       console.log('WYBRANE: ', emptySpaces);
-      
-//       type === 'dzienne'
-//       ? 
-//       this.setState({emptySpacesForDaily: emptySpaces})
-//       : this.setState({emptySpacesForWeekends: emptySpaces})
-//     })
-// }
-
-// hello = () => {
-// fetch('/api/hello')
-//  .then(response => response.text())
-//  .then(message => {
-//     this.setState({message: message});
-//   });
-// };
-
   render() {
-    // console.log('TEsT: ', this.state.test);
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
@@ -96,11 +67,6 @@ class App extends Component {
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
                   userType={this.state.user_type}
-                  emptySpaces={
-                    this.state.user_type === 'dzienne'
-                    ? this.state.emptySpacesForDaily
-                    : this.state.emptySpacesForWeekends
-                  }
                 />}
           />
           <Route
@@ -112,11 +78,6 @@ class App extends Component {
                   choiceHandler={this.choiceHandler}
                   userType={this.state.user_type}
                   cardId={this.state.card_id}
-                  emptySpaces={
-                    this.state.user_type === 'dzienne'
-                    ? this.state.emptySpacesForDaily
-                    : this.state.emptySpacesForWeekends
-                  }
                 />
             }
           />

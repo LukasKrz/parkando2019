@@ -108,10 +108,10 @@ class LoginPage extends Component {
         let card_id = false;
         let correct = false;
 
-        if (this.state.userName.length > 3) {
+        if (this.state.userName.length > 2) {
             userName = true;
         }
-        if (this.state.userSurname.length > 3) {
+        if (this.state.userSurname.length > 2) {
             userSurname = true;
         }
         if (this.state.card_id.length === 3 && !isNaN(this.state.card_id)) {
