@@ -64,13 +64,13 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     }
 
     private List<MiejscePodstawowe> createMiejscaPodstawowe() {
-        MiejscePodstawowe m1 = new MiejscePodstawowe("A", 1L, 101L, LocalDate.now(), 2L, LocalDate.now().minusDays(100L));
-        MiejscePodstawowe m2 = new MiejscePodstawowe("A", 2L, 3L, LocalDate.now(), 4L, LocalDate.now());
-        MiejscePodstawowe m3 = new MiejscePodstawowe("A", 3L, 5L, LocalDate.now().minusDays(10L), 6L, LocalDate.now().minusDays(8L));
-        MiejscePodstawowe m4 = new MiejscePodstawowe("A", 4L, 7L, LocalDate.now(), 8L, LocalDate.now());
-        MiejscePodstawowe m5 = new MiejscePodstawowe("A", 5L, 9L, LocalDate.now(), 103L, LocalDate.now().minusDays(4L));
-        MiejscePodstawowe m6 = new MiejscePodstawowe("A", 6L, 11L, LocalDate.now().minusDays(8L), 12L, LocalDate.now());
-        MiejscePodstawowe m7 = new MiejscePodstawowe("A", 7L, 13L, LocalDate.now(), 102L, LocalDate.now().minusDays(3L));
+        MiejscePodstawowe m1 = new MiejscePodstawowe("A", 1L, 101L, LocalDate.now(), 103L, LocalDate.now().minusDays(4L));
+        MiejscePodstawowe m2 = new MiejscePodstawowe("A", 2L, 105L, LocalDate.now(), 110L, LocalDate.now().minusDays(100L));
+        MiejscePodstawowe m3 = new MiejscePodstawowe("A", 3L, 111L, LocalDate.now().minusDays(15L), 114L, LocalDate.now().minusDays(1L));
+        MiejscePodstawowe m4 = new MiejscePodstawowe("A", 4L, 107L, LocalDate.now(), 102L, LocalDate.now().minusDays(5L));
+        MiejscePodstawowe m5 = new MiejscePodstawowe("A", 5L, 111L, LocalDate.now().minusDays(30L), 108L, LocalDate.now().minusDays(4L));
+        MiejscePodstawowe m6 = new MiejscePodstawowe("A", 6L, 113L, LocalDate.now().minusDays(2L), 108L, LocalDate.now().minusDays(60L));
+        MiejscePodstawowe m7 = new MiejscePodstawowe("A", 7L, 109L, LocalDate.now(), 104L, LocalDate.now().minusDays(3L));
         List<MiejscePodstawowe> miejsca = new ArrayList<>();
         miejsca.addAll(Arrays.asList(m1, m2, m3, m4, m5, m6, m7));
         return miejsca;
@@ -100,8 +100,11 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         Student s12 = new Student(112L, "Mikolaj", "Rej", "zaoczne", "d.awid@interia.pl");
         Student s13 = new Student(113L, "Ignacy", "Krasicki", "dzienne", "d.awid@interia.pl");
         Student s14 = new Student(114L, "Boleslaw", "Lesmian", "zaoczne", "d.awid@interia.pl");
+        Student s15 = new Student(115L, "Witold", "Gombrowicz", "dzienne", "d.awid@interia.pl");
+        Student s16 = new Student(116L, "Adam", "Asnyk", "dzienne", "d.awid@interia.pl");
+        Student s17 = new Student(117L, "Czeslaw", "Milosz", "zaoczne", "d.awid@interia.pl");
         List<Student> studenci = new ArrayList<>();
-        studenci.addAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14));
+        studenci.addAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17));
         return studenci;
     }
 }
