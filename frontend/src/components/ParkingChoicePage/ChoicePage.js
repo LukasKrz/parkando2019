@@ -19,7 +19,9 @@ class ChoicePage extends Component {
     }
 
     checkIfParkingIsOccupied = (number) => {
-        return this.props.occupiedSpaces.some(space => space === number);
+        console.log('NUM: ', number);
+        
+        return this.props.occupiedSpaces.some(space => space !== number);
     }
 
     render() {

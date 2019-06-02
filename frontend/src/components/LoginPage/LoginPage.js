@@ -136,7 +136,7 @@ class LoginPage extends Component {
     }
 
     render() {
-        console.log('TEST: ', this.state.test, this.state.userName);
+        // console.log('TEST: ', this.state.test, this.state.userName);
 
         return (
             < div
