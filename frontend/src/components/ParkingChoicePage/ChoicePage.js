@@ -14,6 +14,25 @@ class ChoicePage extends Component {
         e.preventDefault();
         const number = e.target.id;
         this.props.choiceHandler(number);
+
+        fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                card_id: this.state.card_id,
+            })
+        }).then(response => response.json())
+            .then(data => {
+                console.log('WYSŁANE', data);
+            })
+            .catch(error => {
+                console.log('ERROR: ', error);
+            })
+
+       
         const occupiedSlot = this.checkIfParkingIsOccupied(Number(number));
         if(!occupiedSlot) {
             this.props.history.push(`/confirmation/${this.props.match.params.card_id}/${number}`)    

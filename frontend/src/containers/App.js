@@ -111,6 +111,7 @@ class App extends Component {
                   {...props}
                   choiceHandler={this.choiceHandler}
                   userType={this.state.user_type}
+                  cardId={this.state.card_id}
                   emptySpaces={
                     this.state.user_type === 'dzienne'
                     ? this.state.emptySpacesForDaily
