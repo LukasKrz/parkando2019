@@ -14,9 +14,19 @@
     background-color: #32B0E5;
     color: #fff;
     font-size: 30px;
+    text-align: center;
 
     &__user-name {
-        margin-top: 5px;
+        margin: 15px auto;
+    }
+
+    &__user-type {
+        font-size: 18px;
+        margin: 10px auto;
+
+        span {
+            color: #E04436;
+        }
     }
 
     &__go-btn {

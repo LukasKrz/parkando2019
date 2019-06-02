@@ -57,7 +57,7 @@ class App extends Component {
           />
           <Route
             path="/welcome/:card_id" 
-            render={(props) => <WelcomePage {...props} userName={this.state.userName} />}
+            render={(props) => <WelcomePage {...props} userName={this.state.userName} userType={this.state.user_type}/>}
           />
           <Route
             path='/choicePaking/:card_id'
