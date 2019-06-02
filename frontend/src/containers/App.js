@@ -55,10 +55,14 @@ componentDidMount() {
     .then(data => {
       console.log('TYP: ', type);
       console.log('LISTA: ', data);
+      let occupiedSpaces = [];
+      data.map(a => occupiedSpaces.push(a.parkPlaceId))
+      console.log('WYBRANE: ', occupiedSpaces);
+      
       type === 'dzienne'
       ? 
-      this.setState({occupiedSpacesForDaily: data})
-      : this.setState({occupiedSpacesForWeekends: data})
+      this.setState({occupiedSpacesForDaily: occupiedSpaces})
+      : this.setState({occupiedSpacesForWeekends: occupiedSpaces})
     })
 }
 
