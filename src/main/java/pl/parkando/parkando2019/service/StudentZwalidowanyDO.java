@@ -1,5 +1,7 @@
 package pl.parkando.parkando2019.service;
 
+import java.time.LocalDate;
+
 public class StudentZwalidowanyDO {
 
     private Long user_id;
@@ -16,10 +18,19 @@ public class StudentZwalidowanyDO {
 
     private Long park_place_id;
 
+    private LocalDate reservationDatePodstawowe;
+
+    private Long parkPlaceIdDodatkowe;
+
+    private String dayOfWeek;
+
+    private LocalDate reservationDateDodatkowe;
+
     public StudentZwalidowanyDO() {
     }
 
-    public StudentZwalidowanyDO(Long user_id, Long card_id, String name, String surname, String user_type, String park_id, Long park_place_id) {
+    public StudentZwalidowanyDO(Long user_id, Long card_id, String name, String surname, String user_type, String park_id, Long park_place_id,
+                                LocalDate reservationDatePodstawowe, Long parkPlaceIdDodatkowe, String dayOfWeek, LocalDate reservationDateDodatkowe) {
         this.user_id = user_id;
         this.card_id = card_id;
         this.name = name;
@@ -27,6 +38,10 @@ public class StudentZwalidowanyDO {
         this.user_type = user_type;
         this.park_id = park_id;
         this.park_place_id = park_place_id;
+        this.reservationDatePodstawowe = reservationDatePodstawowe;
+        this.parkPlaceIdDodatkowe = parkPlaceIdDodatkowe;
+        this.dayOfWeek = dayOfWeek;
+        this.reservationDateDodatkowe = reservationDateDodatkowe;
     }
 
     public Long getUser_id() {
@@ -83,5 +98,37 @@ public class StudentZwalidowanyDO {
 
     public void setPark_place_id(Long park_place_id) {
         this.park_place_id = park_place_id;
+    }
+
+    public LocalDate getReservationDatePodstawowe() {
+        return reservationDatePodstawowe;
+    }
+
+    public void setReservationDatePodstawowe(LocalDate reservationDatePodstawowe) {
+        this.reservationDatePodstawowe = reservationDatePodstawowe;
+    }
+
+    public Long getParkPlaceIdDodatkowe() {
+        return parkPlaceIdDodatkowe;
+    }
+
+    public void setParkPlaceIdDodatkowe(Long parkPlaceIdDodatkowe) {
+        this.parkPlaceIdDodatkowe = parkPlaceIdDodatkowe;
+    }
+
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public LocalDate getReservationDateDodatkowe() {
+        return reservationDateDodatkowe;
+    }
+
+    public void setReservationDateDodatkowe(LocalDate reservationDateDodatkowe) {
+        this.reservationDateDodatkowe = reservationDateDodatkowe;
     }
 }
