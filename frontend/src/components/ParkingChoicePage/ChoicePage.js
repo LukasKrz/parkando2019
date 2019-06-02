@@ -68,6 +68,24 @@ class ChoicePage extends Component {
         return (
             <section className="choice-page-container">
                 <div className="choice-page-container__map-details map-details">
+                <SpaceInput
+                        number={10}
+                        // emptySpaces={this.props.emptySpaces}
+                        // handleClick={this.handleClick}
+                        occupied={true}
+                    />
+                    <SpaceInput
+                        number={9}
+                        // emptySpaces={this.props.emptySpaces}
+                        // handleClick={this.handleClick}
+                        occupied={true}
+                    />
+                    <SpaceInput
+                        number={8}
+                        // emptySpaces={this.props.emptySpaces}
+                        // handleClick={this.handleClick}
+                        occupied={true}
+                    />
                     <SpaceInput
                         number={7}
                         emptySpaces={this.props.emptySpaces}
