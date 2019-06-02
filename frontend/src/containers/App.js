@@ -95,6 +95,7 @@ class App extends Component {
                 <ParkingChoicePage
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
+                  userType={this.state.user_type}
                   emptySpaces={
                     this.state.user_type === 'dzienne'
                     ? this.state.emptySpacesForDaily
