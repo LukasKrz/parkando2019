@@ -13,6 +13,7 @@ class ChoicePage extends Component {
         //TODO POST
         e.preventDefault();
         const number = e.target.id;
+        // this.props.choiceHandler(number);
 
         // fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
         //     method: 'PUT',
@@ -25,7 +26,7 @@ class ChoicePage extends Component {
         //     })
         // }).then(response => response.json())
         //     .then(data => {
-        //         this.props.choiceHandler(number);
+        //         
         //         console.log('WYSŁANE', data);
         //     })
         //     .catch(error => {
