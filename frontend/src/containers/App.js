@@ -83,7 +83,7 @@ class App extends Component {
           />
           <Route
             path="/confirmation/:card_id/:park_place_id"
-            render={(props) => <ConfirmationPage {...props} choiceHandler={this.choiceHandler}
+            render={(props) => <ConfirmationPage {...props} choiceHandler={this.choiceHandler} userType={this.state.user_type} cardId={this.state.card_id}
             userName={this.state.userName} userSurname={this.state.userSurname} />}
             match={matchPath}
           />

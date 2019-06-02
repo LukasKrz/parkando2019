@@ -18,6 +18,7 @@ class ConfirmationPage extends Component {
         e.preventDefault();
         const number = this.props.match.params.park_place_id;
         this.props.choiceHandler(this.props.match.params.park_place_id);
+        console.log('test', number);
         this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${number}`)
         fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
             method: 'PUT',
