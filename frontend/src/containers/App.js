@@ -47,33 +47,20 @@ class App extends Component {
   //   let daily = [];
   //   let weekends = [];
 
-  //   users.parkandoUsers.map(a => {
-  //     if(a.park_place_id !== null) {
-  //       a.user_type === "Dzienny"
-  //         ? daily.push(a.park_place_id)
-  //         : weekends.push(a.park_place_id)
-  //     }
-  //   });
 
-  //   this.setState({
-  //     occupiedSpacesForDaily: daily,
-  //     occupiedSpacesForWeekends: weekends,
-  //   });
-  // }
-
-  // componentDidMount() {
-  //   fetch('/api/hello')
-  //     .then(response => response.text()) // res.json()
-  //     .then(message => {
-  //         this.setState({test: message});
-  //   });
-
-  //   this.logUser(this.state.card_id, this.state.userName, this.state.userSurname, this.state.user_type)
-  // }
-
-// componentDidMount() {
-//     setInterval(this.hello, 250);
-// }
+componentDidMount() {
+  const type = this.state.user_type.toLowerCase();
+  fetch(`miejsca/dostepnepodstawowe/${type}`)
+  .then(response => response.json())
+    .then(data => {
+      console.log('TYP: ', type);
+      console.log('LISTA: ', data);
+      type === 'dzienne'
+      ? 
+      this.setState({occupiedSpacesForDaily: data})
+      : this.setState({occupiedSpacesForWeekends: data})
+    })
+}
 
 // hello = () => {
 // fetch('/api/hello')

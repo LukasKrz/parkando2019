@@ -108,7 +108,7 @@ class LoginPage extends Component {
         let card_id = false;
         let correct = false;
 
-        if (this.state.userName.length > 3) { // && this.state.userName.indexOf(' ') === -1 - info TEST
+        if (this.state.userName.length > 3) {
             userName = true;
         }
         if (this.state.userSurname.length > 3) {
@@ -128,52 +128,7 @@ class LoginPage extends Component {
             card_id,
         })
     }
-
-    // TODO findUser, userParkingSpaceValidation, setUserType probably remove or modified when backend is in
-    // findUser(cardNumber, userName, userSurname) {
-    //   // return this.props.users.filter(user =>
-    //   //   user.name.toLowerCase() === userName.toLowerCase()
-    //   //   && user.surname.toLowerCase() === userSurname.toLowerCase()
-    //   //   && user.card_id === Number(cardNumber));   
-    //   fetch('/api/studenci/walidacja',{
-    //     method: 'POST',
-    //     headers: {
-    //     Accept: 'application/json',
-    //             'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       card_id: cardNumber,
-    //       name: userName,
-    //       surname: userSurname
-    //     })
-    //     }).then(response => {
-    //       console.log('RES: ', response.json());
-    //       const res = response.json();
-    //       res.card_id !== null
-    //       ? res.map(s => console.log('RES: ', s))
-    //       : console.log(res);
-    //       return true;
-    //     })
-    //     .catch(error =>{
-    //       console.log(error);
-    //       return false;
-    //     })   
-    // }
-
-    // userParkingSpaceValidation(cardNumber, userName, userSurname) {
-    //   const user = this.findUser(cardNumber, userName, userSurname);
-    //   let place = null; 
-    //   user.map(el => place = el.park_place_id)
-    //   return place;
-    // }
-
-    // setUserType(cardNumber, userName, userSurname) {
-    //   const user = this.findUser(cardNumber, userName, userSurname);
-    //   let type = ''; 
-    //   user.map(el => type = el.user_type)
-    //   return type;
-    // }
-
+    
     componentDidUpdate() {
         if (this.state.message !== '') {
             setTimeout(() => this.setState({message: ''}), 2000);
