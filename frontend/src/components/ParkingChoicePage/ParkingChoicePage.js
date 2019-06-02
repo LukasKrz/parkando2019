@@ -13,7 +13,7 @@ class ParkingChoicePage extends Component {
 
     handleClick = (e) => {
         e.preventDefault();
-        this.props.history.push(`/choice/${this.props.match.params.card_id}`)
+        this.props.history.push(`/choice/${this.props.match.params.card_id}/${this.props.match.params.extra_place}`)
         // przejscie do wyboru miejsca dodatkowego
         // this.props.history.push(`/choice/${this.props.match.params.card_id}/${this.props.match.params.extra_place}`)
     }
