@@ -17,7 +17,7 @@ class App extends Component {
   state = {
     card_id: null,
     park_place_id: null,
-    user_type: 'Dzienny',
+    user_type: 'Dzienne',
     expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
     userSurname: '',
@@ -101,7 +101,7 @@ componentDidMount() {
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
                   occupiedSpaces={
-                    this.state.user_type === 'Dzienny'
+                    this.state.user_type === 'Dzienne'
                     ? this.state.occupiedSpacesForDaily
                     : this.state.occupiedSpacesForWeekends
                   }
@@ -115,7 +115,7 @@ componentDidMount() {
                   {...props}
                   choiceHandler={this.choiceHandler}
                   occupiedSpaces={
-                    this.state.user_type === 'Dzienny'
+                    this.state.user_type === 'Dzienne'
                     ? this.state.occupiedSpacesForDaily
                     : this.state.occupiedSpacesForWeekends
                   }
