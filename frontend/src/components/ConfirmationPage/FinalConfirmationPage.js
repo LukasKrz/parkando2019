@@ -16,7 +16,7 @@ class FinalConfirmationPage extends Component {
                 <div className="confirmation-container__expiration expiration">
                     Rezerwacja jest ważna 
                     <div>
-                        {this.props.userType === 'Dzienny'
+                        {this.props.userType === 'dzienne'
                             ? 'od pon do pt'
                             : 'w sob i niedz'
                         }
