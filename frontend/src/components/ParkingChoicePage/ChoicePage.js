@@ -24,7 +24,7 @@ class ChoicePage extends Component {
 
     componentWillMount() {
         // const type = this.state.user_type.toLowerCase();
-        fetch(`miejsca/dostepnepodstawowe/${this.props.userType}`)
+        fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
         .then(response => response.json())
           .then(data => {
             console.log('TYP: ', this.props.userType);

@@ -19,12 +19,8 @@ class ParkingChoicePage extends Component {
         fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
         .then(response => response.json())
           .then(data => {
-            console.log('TYP: ', this.props.userType);
-            console.log('LISTA: ', data);
             let emptySpacesFromBack = [];
             data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
-            console.log('WYBRANE: ', emptySpacesFromBack);
-
             this.setState({emptySpaces: emptySpacesFromBack});
           })
       }
