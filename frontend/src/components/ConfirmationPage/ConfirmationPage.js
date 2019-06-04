@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 
 class ConfirmationPage extends Component {
-    // PUT na miejsce!
-
     handleClick = (e) => {
         e.preventDefault();
         const number = this.props.match.params.park_place_id;
@@ -24,7 +22,8 @@ class ConfirmationPage extends Component {
             body: JSON.stringify({
                 card_id: this.props.cardId,
             })
-        }).then(response => response.json())
+        })
+            .then(response => response.json())
             .then(data => {
                 console.log('WYSŁANE', data);
             })
@@ -34,6 +33,7 @@ class ConfirmationPage extends Component {
     }
 
     render() {
+        const extraPlace = this.props.match.params.extra_place;
         return (
             <section className="confirmation-container">
                 Wybrałeś miejsce:
@@ -47,7 +47,7 @@ class ConfirmationPage extends Component {
                     </button>
                     <button
                         className="buttons-section__back-btn"
-                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}`)}}
+                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/${extraPlace}}`)}}
                     >
                         COFNIJ
                     </button>

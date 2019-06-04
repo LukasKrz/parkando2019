@@ -4,15 +4,12 @@ import moment from 'moment';
 
 import history from '../modules/history';
 
-// import users from '../mocks/users.js';
-
 import LoginPage from '../components/LoginPage/LoginPage';
 import WelcomePage from '../components/WelcomePage/WelcomePage';
 import ChoicePage from '../components/ParkingChoicePage/ChoicePage';
 import ParkingChoicePage from '../components/ParkingChoicePage/ParkingChoicePage';
 import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmationPage';
-
 import FinalConfirmationWithTwoReservation from '../components/ConfirmationPage/FinalConfirmationWithTwoReservation';
 import DayChoicePage from '../components/DayChoicePage/DayChoicePage';
 
@@ -24,7 +21,8 @@ class App extends Component {
     user_type: '',
     expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
-    userSurname: ''
+    userSurname: '',
+    emptySpaces: [],
   }
 
   choiceHandler = (number) => {
@@ -40,6 +38,20 @@ class App extends Component {
       userName: userName,
       userSurname: userSurname,
       park_place_id: placeId
+    })
+    this.getEmptySpaces(userType)
+  }
+
+  getEmptySpaces = (userType) => {
+    fetch(`/miejsca/dostepnepodstawowe/${userType}`)
+      .then(response => response.json())
+      .then(data => {
+        let emptySpacesFromBack = [];
+        console.log('DATA: ', data);
+        
+        data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+        this.setState({emptySpaces: emptySpacesFromBack});
+        // return emptySpacesFromBack;
     })
   }
 
@@ -62,7 +74,14 @@ class App extends Component {
           />
           <Route
             path="/welcome/:card_id" 
-            render={(props) => <WelcomePage {...props} userName={this.state.userName} userType={this.state.user_type}/>}
+            render={
+              (props) =>
+                <WelcomePage
+                  {...props}
+                  userName={this.state.userName}
+                  userType={this.state.user_type}
+                />
+            }
           />
           <Route
             path='/choicePaking/:card_id/:extra_place'
@@ -72,6 +91,7 @@ class App extends Component {
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
                   userType={this.state.user_type}
+                  emptySpaces={this.state.emptySpaces}
                 />}
           />
           <Route
@@ -83,13 +103,23 @@ class App extends Component {
                   choiceHandler={this.choiceHandler}
                   userType={this.state.user_type}
                   cardId={this.state.card_id}
+                  emptySpaces={this.emptySpaces}
                 />
             }
           />
           <Route
             path="/confirmation/:card_id/:extra_place/:park_place_id"
-            render={(props) => <ConfirmationPage {...props} choiceHandler={this.choiceHandler} userType={this.state.user_type} cardId={this.state.card_id}
-            userName={this.state.userName} userSurname={this.state.userSurname} />}
+            render={
+              (props) =>
+                <ConfirmationPage
+                  {...props}
+                  choiceHandler={this.choiceHandler}
+                  userType={this.state.user_type}
+                  cardId={this.state.card_id}
+                  userName={this.state.userName}
+                  userSurname={this.state.userSurname}
+                />
+            }
             match={matchPath}
           />
           <Route

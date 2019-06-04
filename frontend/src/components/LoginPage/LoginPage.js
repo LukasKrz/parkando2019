@@ -57,8 +57,8 @@ class LoginPage extends Component {
                     surname: this.state.userSurname
                 })
             }).then(response => response.json())
-                .then(data => {
-                  if(data.card_id !== null) {
+            .then(data => {
+                if(data.card_id !== null) {
                     this.setState({
                         userName: data.name,
                         userSurname: data.surname,
@@ -87,7 +87,6 @@ class LoginPage extends Component {
                   console.log('NIE MA USERA');  
                   }
                 })
-
             .catch(error => {
               console.log(error);
             })
@@ -136,70 +135,45 @@ class LoginPage extends Component {
     }
 
     render() {
-        // console.log('TEST: ', this.state.test, this.state.userName);
-
         return (
-            < div
-        className = "login-container" >
-            < div
-        className = "login-container__logo" >
-            < img
-        src = {bigLogo}
-        alt = "parkando-logo" / >
-            < /div>
-            < form
-        className = "login-container__form form"
-        onSubmit = {this.handleSubmit}
-        noValidate >
-        {
-            this.state.errors.userInDB && < span className = "simple-label__error error--top" > {this.messages.noUserInDB} < /span>}
-            < label htmlFor = "number" className = "form__simple-label simple-label" > Podaj nr karty
-    :
-    <
-        input
-        type = "text"
-        id = "number"
-        name = "card_id"
-        value = {this.state.card_id}
-        onChange = {this.handleChange}
-        className = "simple-label__input"
-            / >
-            {
-                this.state.errors.card_id && < span className = "simple-label__error" > {this.messages.card_idIncorrect} < /span>}
-                < /label>
-                < label htmlFor = "name" className = "form__simple-label simple-label" > Imię
-    :
-    <
-        input
-        type = "text"
-        id = "name"
-        name = "userName"
-        value = {this.state.userName}
-        onChange = {this.handleChange}
-        className = "simple-label__input"
-            / >
-            {
-                this.state.errors.userName && < span className = "simple-label__error" > {this.messages.userNameIncorrect} < /span>}
-                < /label>
-                < label htmlFor = "surname" className = "form__simple-label simple-label" > Nazwisko
-    :
-    <
-        input
-        type = "text"
-        id = "surname"
-        name = "userSurname"
-        value = {this.state.userSurname}
-        onChange = {this.handleChange}
-        className = "simple-label__input"
-            / >
-            {
-                this.state.errors.userSurname && < span className = "simple-label__error" > {this.messages.userSurnameIncorrect} < /span>}
-                < /label>
-                < button className = "form__login-btn" > Zaloguj < /button>
-                < /form>
-        {
-            this.state.message && < h3 > {this.state.message} < /h3>}
-            < /div>
+            <div className="login-container">
+                <div className="login-container__logo">
+                    <img src={bigLogo} alt="parkando-logo" />
+                </div>
+                <form className="login-container__form form" onSubmit={this.handleSubmit} noValidate>
+                    { this.state.errors.userInDB 
+                        && <span className="simple-label__error error--top">
+                                {this.messages.noUserInDB}
+                            </span>
+                    }
+                    <label htmlFor="number" className="form__simple-label simple-label">
+                        Podaj nr karty:
+                        <input type="text" id="number" name="card_id" value={this.state.card_id} onChange={this.handleChange} className="simple-label__input" />
+                    { this.state.errors.card_id
+                        && <span className="simple-label__error">
+                                {this.messages.card_idIncorrect}
+                            </span>}
+                    </label>
+                    <label htmlFor="name" className="form__simple-label simple-label">
+                        Imię:
+                        <input type="text" id="name" name="userName" value={this.state.userName} onChange={this.handleChange} className="simple-label__input" />
+                    { this.state.errors.userName
+                        && <span className="simple-label__error">
+                                {this.messages.userNameIncorrect}
+                            </span>}
+                    </label>
+                    <label htmlFor="surname" className="form__simple-label simple-label">
+                        Nazwisko:
+                        <input type="text" id="surname" name="userSurname" value={this.state.userSurname} onChange={this.handleChange} className="simple-label__input" />
+                    { this.state.errors.userSurname
+                        && <span className="simple-label__error">
+                                {this.messages.userSurnameIncorrect}
+                            </span>}
+                    </label>
+                    <button className="form__login-btn">Zaloguj</button>
+                </form>
+                { this.state.message && <h3>{this.state.message}</h3>}
+            </div>
         )
     }
 }

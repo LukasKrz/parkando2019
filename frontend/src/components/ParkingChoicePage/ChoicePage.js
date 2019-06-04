@@ -13,30 +13,8 @@ class ChoicePage extends Component {
     }
 
     handleClick = (e) => {
-        //TODO POST
         e.preventDefault();
         const number = e.target.id;
-        // this.props.choiceHandler(number);
-
-        // fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
-        //     method: 'PUT',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         card_id: this.props.cardId,
-        //     })
-        // }).then(response => response.json())
-        //     .then(data => {
-        //         
-        //         console.log('WYSŁANE', data);
-        //     })
-        //     .catch(error => {
-        //         console.log('ERROR: ', error);
-        //     })
-
-       
         const occupiedSlot = this.checkIfParkingIsOccupied(Number(number));
         if(!occupiedSlot) {
             this.props.history.push(`/confirmation/${this.props.match.params.card_id}/${this.props.match.params.extra_place}/${number}`)    
@@ -45,28 +23,25 @@ class ChoicePage extends Component {
         }        
     }
 
-    componentWillMount() {
-        fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
-        .then(response => response.json())
-          .then(data => {
-            // console.log('TYP: ', this.props.userType);
-            console.log('LISTA: ', data);
-            let emptySpacesFromBack = [];
-            data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
-            console.log('WYBRANE: ', emptySpacesFromBack);
+    // componentWillMount() {
+    //     fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
+    //     .then(response => response.json())
+    //       .then(data => {
+    //         // console.log('TYP: ', this.props.userType);
+    //         console.log('LISTA: ', data);
+    //         let emptySpacesFromBack = [];
+    //         data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+    //         console.log('WYBRANE: ', emptySpacesFromBack);
  
-            this.setState({emptySpaces: emptySpacesFromBack});
-          })
-        this.getEmptyExtraPlaces(1);
-      }
+    //         this.setState({emptySpaces: emptySpacesFromBack});
+    //       })
+    //     // this.setState({emptySpaces: this.props.getEmptySpaces(this.props.userType)});
+    //     this.getEmptyExtraPlaces(1);
+    //   }
 
     checkIfParkingIsOccupied = (number) => {
-        // console.log('NUM: ', number);
-        // return this.props.emptySpaces.some(space => space !== number);
-        console.log('EXTRA: ', this.state.extraSpaces);
-        
         return Number(this.props.match.params.extra_place) === 0
-        ? !this.state.emptySpaces.some(space => space === number)
+        ? !this.props.emptySpaces.some(space => space === number)
         : !this.state.extraSpaces.some(space => space === number)
     }
 
@@ -104,6 +79,7 @@ class ChoicePage extends Component {
     }
 
     render() {
+        console.log('empty from App in ChoicePage: ', this.props.emptySpaces);
         return (
             <section className="choice-page-container">
                 <div className="choice-page-container__map-details map-details">

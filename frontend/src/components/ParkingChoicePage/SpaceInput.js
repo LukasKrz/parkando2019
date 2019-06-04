@@ -10,12 +10,12 @@ class SpaceInput extends Component {
             this.props.occupied
                 ? <CarElement number={this.props.number}/>
                 : <input 
-                className={classNames('map-details__btn-place', 'btn-place', `btn-place--${this.props.number}`, {'btn-place--disabled': this.props.occupied})}
-                type="button"
-                value={this.props.number}
-                id={this.props.number}
-                onClick={this.props.handleClick}
-            ></input>
+                    className={classNames('map-details__btn-place', 'btn-place', `btn-place--${this.props.number}`, {'btn-place--disabled': this.props.occupied})}
+                    type="button"
+                    value={this.props.number}
+                    id={this.props.number}
+                    onClick={this.props.handleClick}
+                ></input>
         )
     }
 }
