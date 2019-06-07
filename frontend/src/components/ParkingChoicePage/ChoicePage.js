@@ -33,7 +33,6 @@ class ChoicePage extends Component {
             this.setState({emptySpaces: emptySpacesFromBack});
           })
           this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
-          // this.getEmptyExtraPlaces(1);
       }
 
     checkIfParkingIsOccupied = (number) => {
@@ -76,9 +75,6 @@ class ChoicePage extends Component {
     }
 
     render() {
-        console.log('EXTRA PLACES: ', this.state.emptyExtraSpaces);
-        console.log('CHECK IF extra_place === 0', Number(this.props.match.params.extra_place) === 0);
-         
         return (
             <section className="choice-page-container">
                 <InfoButton history={this.props.history}/>

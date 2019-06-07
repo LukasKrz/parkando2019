@@ -9,7 +9,6 @@ class ConfirmationPage extends Component {
         e.preventDefault();
         const number = this.props.match.params.park_place_id;
         Number(this.props.match.params.extra_place) === 0 && this.props.choiceHandler(number);
-        console.log('test', number);
         this.props.history.push(
             Number(this.props.match.params.extra_place) === 0
             ? `/final-confirmation/${this.props.match.params.card_id}/${this.props.match.params.extra_place}/${number}`
@@ -54,7 +53,7 @@ class ConfirmationPage extends Component {
                     </button>
                     <button
                         className="buttons-section__back-btn"
-                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/0`)}} // COME BACK!!!
+                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/0`)}} // TODO!!!
                     >
                         COFNIJ
                     </button>

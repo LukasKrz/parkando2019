@@ -50,12 +50,6 @@ class FinalConfirmationPage extends Component {
                         DODATKOWE MIEJSCE
                     </button>
                 </div>
-                {/* <button
-                    className="buttons-section__log-out-btn"
-                    onClick={(e) => {e.preventDefault(); this.props.history.push(`/`)}}
-                >
-                    WYLOGUJ
-                </button> */}
             </section>
         )
     }

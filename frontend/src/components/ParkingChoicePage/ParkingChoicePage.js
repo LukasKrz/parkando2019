@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { withRouter } from "react-router-dom";
 
-import dayPlacesMap from '../../mocks/dayPlacesMap.js'; // moki!
+import dayPlacesMap from '../../mocks/dayPlacesMap.js';
 
 import emptyPin from '../../images/pusty_pin.png';
 import InfoButton from '../InfoModal/InfoButton.js';
@@ -16,7 +16,6 @@ class ParkingChoicePage extends Component {
     handleClick = (e) => {
         e.preventDefault();
         this.props.history.push(`/choice/${this.props.match.params.card_id}/${this.props.match.params.extra_place}`)
-        // przejscie do wyboru miejsca dodatkowego
     }
 
     componentWillMount() {
@@ -62,7 +61,6 @@ class ParkingChoicePage extends Component {
     }
 
     render() {
-        // const emptyExtra = this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place));
         return (
             <section className="parking-choice-container">
                 <InfoButton history={this.props.history}/>
