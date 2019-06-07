@@ -3,6 +3,8 @@ import moment from 'moment';
 
 import { withRouter } from "react-router-dom";
 
+import InfoButton from '../InfoModal/InfoButton.js';
+
 class FinalConfirmationWithTwoReservation extends Component {
     getDayName = (dayNumber) => {
         let dayName = '';
@@ -48,6 +50,7 @@ class FinalConfirmationWithTwoReservation extends Component {
         const extraDate = this.getExperienceDateForExactDay(Number(this.props.match.params.extra_place)).format('DD.MM.YYYY');        
         return (
             <section className="confirmation-container confirmation-container--two-reservation">
+                <InfoButton />
                 <div className="confirmation-container__user user">
                     Aktualne rezerwacje dla:
                     <div>{`${this.props.userName} ${this.props.userSurname}`}</div>

@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import dayPlacesMap from '../../mocks/dayPlacesMap.js';
 
 import SpaceInput from './SpaceInput.js';
+import InfoButton from '../InfoModal/InfoButton.js';
 
 class ChoicePage extends Component {
     state = {
@@ -80,6 +81,7 @@ class ChoicePage extends Component {
          
         return (
             <section className="choice-page-container">
+                <InfoButton />
                 <div className="choice-page-container__map-details map-details">
                 <SpaceInput
                         number={10}

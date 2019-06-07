@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 
 import { withRouter } from "react-router-dom";
 
+import InfoButton from '../InfoModal/InfoButton.js';
+
 class FinalConfirmationPage extends Component {    
     render() {
         return (
             <section className="confirmation-container confirmation-container--final-view">
+                <InfoButton />
                 <div className="confirmation-container__place place">
                     Miejsce <span className="place__number">{this.props.match.params.park_place_id}</span>
                 </div>

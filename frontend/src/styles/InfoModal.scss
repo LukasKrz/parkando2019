@@ -1,0 +1,38 @@
+.info-btn {
+    border: none;
+    outline: none;
+    position: fixed;
+    top: 22px;
+    right: calc(5vw + 2px);
+    background: url(../images/infio.png);
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    z-index: 10;
+
+    &--close-sign {
+        background: white;
+        color: #3498DB;
+        font-size: 30px;
+        padding-top: 5px;
+    }
+}
+.modal {
+    position: absolute;
+    top: 20px;
+    right: 5vw;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    transition: .2s;
+
+    &--visible {
+        z-index: 9;
+        width: 90vw;
+        height: 350px;
+        background-color: white;
+        color: black;
+        border-radius: 10px;
+    }
+}

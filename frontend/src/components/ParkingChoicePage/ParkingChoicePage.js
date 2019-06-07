@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import dayPlacesMap from '../../mocks/dayPlacesMap.js'; // moki!
 
 import emptyPin from '../../images/pusty_pin.png';
+import InfoButton from '../InfoModal/InfoButton.js';
 
 class ParkingChoicePage extends Component {
     state = {
@@ -64,6 +65,7 @@ class ParkingChoicePage extends Component {
         // const emptyExtra = this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place));
         return (
             <section className="parking-choice-container">
+                <InfoButton />
                 <div className="parking-choice-container__map map">
                     <button className="map__parking-btn parking-btn parking-btn--active parking-btn--active-1" id={1} onClick={this.handleClick}>
                         <span className="parking-btn__number">{

@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import dayPlacesMap from '../../mocks/dayPlacesMap.js';
 
 import SingleDayButton from './SingleDayButton.js';
+import InfoButton from '../InfoModal/InfoButton.js';
 
 class DayChoicePage extends Component {
     state = {
@@ -57,6 +58,7 @@ class DayChoicePage extends Component {
         return (
             this.state.noPlace
             ? <section className="day-choice-container">
+                <InfoButton />
                 <span className="day-choice-container__no-place-info">PRZYKRO NAM, NIE MA DODATKOWYCH WOLNYCH MIEJSC NA NAJBLIŻSZY TYDZIEŃ</span>
                 <button
                     className="day-choice-container__log-out-btn"
@@ -66,6 +68,7 @@ class DayChoicePage extends Component {
                 </button>
             </section>
             : <section className="day-choice-container">
+                <InfoButton />
                 Wybierz dzień
                 <p className="day-choice-container__date">
                     {`rezerwacja parkingu na jeden dzień tygodnia ważna do ${moment().add(6, 'd').format('DD.MM.YYYY')}`}

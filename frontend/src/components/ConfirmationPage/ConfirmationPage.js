@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { withRouter } from "react-router-dom";
 
+import InfoButton from '../InfoModal/InfoButton.js';
+
 class ConfirmationPage extends Component {
     handleClick = (e) => {
         e.preventDefault();
@@ -40,6 +42,7 @@ class ConfirmationPage extends Component {
         
         return (
             <section className="confirmation-container">
+                <InfoButton />
                 Wybrałeś miejsce:
                 <div className="confirmation-container__number">{this.props.match.params.park_place_id}</div>
                 <div className="confirmation-container__buttons-section buttons-section">
