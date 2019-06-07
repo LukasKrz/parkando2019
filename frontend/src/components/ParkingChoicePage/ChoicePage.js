@@ -81,7 +81,7 @@ class ChoicePage extends Component {
          
         return (
             <section className="choice-page-container">
-                <InfoButton />
+                <InfoButton history={this.props.history}/>
                 <div className="choice-page-container__map-details map-details">
                 <SpaceInput
                         number={10}

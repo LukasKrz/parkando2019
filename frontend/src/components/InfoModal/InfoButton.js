@@ -18,10 +18,17 @@ class InfoButton extends Component {
                 >
                     {this.state.isModalOpen && 'X'}
                 </button>
-                <div className={classNames('modal', {'modal--visible': this.state.isModalOpen})}>
-                    Kontakt: 
-                    WYLOGUJ
-                    ZAMKNIJ
+                <div className={classNames('modal-overlay', {'modal-overlay--visible': this.state.isModalOpen})}>
+                    <div className={classNames('modal', {'modal--visible': this.state.isModalOpen})}>
+                        <p>Kontakt z uczelnią: <span>pomoc@library.put.poznan.pl</span></p>
+                        <p>Kontakt z autorami aplikacji: <span>contact@parkando.com</span></p>
+                        <button
+                            className="modal__log-out-btn"
+                            onClick={(e) => {e.preventDefault(); this.props.history.push(`/`)}}
+                            >
+                            WYLOGUJ
+                        </button>
+                    </div>
                 </div>
             </>
         )

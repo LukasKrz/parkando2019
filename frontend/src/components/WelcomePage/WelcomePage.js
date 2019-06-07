@@ -9,7 +9,7 @@ class WelcomePage extends Component {
     render() {
         return (
             <section className="welcome-container">
-                <InfoButton />
+                <InfoButton history={this.props.history}/>
                 Witaj,
                 <div className="welcome-container__user-name">{this.props.userName}!</div>
                 <div className="welcome-container__user-type">{`Tryb studiów: ${this.props.userType}`}</div>
