@@ -22,7 +22,6 @@ class DayChoicePage extends Component {
 
     componentWillMount() {
         //TODO GET from DB, backend
-        console.log('dayPlacesMap: ', dayPlacesMap.pon);
         
         const isAnyFreePlace = this.props.userType === "dzienne"
             ? (dayPlacesMap.sob.length + dayPlacesMap.niedz.length === 0)

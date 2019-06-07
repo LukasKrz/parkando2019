@@ -8,7 +8,8 @@ import emptyPin from '../../images/pusty_pin.png';
 
 class ParkingChoicePage extends Component {
     state = {
-        emptySpaces: []
+        emptySpaces: [],
+        extraSpaces: []
     }
 
     handleClick = (e) => {
@@ -24,7 +25,8 @@ class ParkingChoicePage extends Component {
             let emptySpacesFromBack = [];
             data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
             this.setState({emptySpaces: emptySpacesFromBack});
-          })
+          });
+        this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
       }
 
       getEmptyExtraPlaces = (day) => {
@@ -59,7 +61,7 @@ class ParkingChoicePage extends Component {
     }
 
     render() {
-        const emptyExtra = this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place));
+        // const emptyExtra = this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place));
         return (
             <section className="parking-choice-container">
                 <div className="parking-choice-container__map map">
@@ -67,7 +69,7 @@ class ParkingChoicePage extends Component {
                         <span className="parking-btn__number">{
                             Number(this.props.match.params.extra_place) === 0
                             ? this.state.emptySpaces.length
-                            : emptyExtra.length  
+                            : this.state.extraSpaces.length  
                             }</span>
                         <img src={emptyPin} alt='pin wyboru parkingu' />
                     </button>

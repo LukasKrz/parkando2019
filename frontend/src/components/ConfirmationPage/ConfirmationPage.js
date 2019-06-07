@@ -13,23 +13,25 @@ class ConfirmationPage extends Component {
             ? `/final-confirmation/${this.props.match.params.card_id}/${this.props.match.params.extra_place}/${number}`
             : `/two-reservation/${this.props.match.params.card_id}/${this.props.match.params.extra_place}/${number}`
         )
-        fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
-            method: 'PUT',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                card_id: this.props.cardId,
+        if(Number(this.props.match.params.extra_place) === 0) {
+            fetch(`/miejsca/rezerwacjapodstawowe/${this.props.userType}/${number}`, {
+                method: 'PUT',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    card_id: this.props.cardId,
+                })
             })
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('WYSŁANE', data);
-            })
-            .catch(error => {
-                console.log('ERROR: ', error);
-            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('WYSŁANE', data);
+                })
+                .catch(error => {
+                    console.log('ERROR: ', error);
+                })
+        }
     }
 
     render() {

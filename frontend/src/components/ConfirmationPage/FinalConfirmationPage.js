@@ -22,7 +22,8 @@ class FinalConfirmationPage extends Component {
                         }
                     </div>
                     do
-                    <div className="expiration__date">{this.props.expirationDate}</div> 
+                    <div className="expiration__date">{this.props.expirationDate}</div>
+                    {/* TODO data z backendu */} 
                 </div>
                 <div className="confirmation-container__enjoy">Miłego parkowania!</div>
                 <div className="confirmation-container__enjoy">

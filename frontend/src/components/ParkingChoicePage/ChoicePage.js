@@ -31,7 +31,8 @@ class ChoicePage extends Component {
             data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
             this.setState({emptySpaces: emptySpacesFromBack});
           })
-        this.getEmptyExtraPlaces(1);
+          this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
+          // this.getEmptyExtraPlaces(1);
       }
 
     checkIfParkingIsOccupied = (number) => {
@@ -74,11 +75,15 @@ class ChoicePage extends Component {
     }
 
     render() {
+        console.log('EXTRA PLACES: ', this.state.emptyExtraSpaces);
+        console.log('CHECK IF extra_place === 0', Number(this.props.match.params.extra_place) === 0);
+         
         return (
             <section className="choice-page-container">
                 <div className="choice-page-container__map-details map-details">
                 <SpaceInput
                         number={10}
+                        handleClick={this.handleClick}
                         occupied={
                             Number(this.props.match.params.extra_place) === 0
                             ? true
@@ -87,14 +92,14 @@ class ChoicePage extends Component {
                     />
                     <SpaceInput
                         number={9}
+                        handleClick={this.handleClick}
                         occupied={
-                            Number(this.props.match.params.extra_place) === 0
-                            ? true
-                            : this.checkIfParkingIsOccupied(9)
+                           this.checkIfParkingIsOccupied(9)
                         }
                     />
                     <SpaceInput
                         number={8}
+                        handleClick={this.handleClick}
                         occupied={
                             Number(this.props.match.params.extra_place) === 0
                             ? true

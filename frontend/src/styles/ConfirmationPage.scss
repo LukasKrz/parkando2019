@@ -102,4 +102,31 @@
         font-size: 18px;
         padding: 20px 0;
     }
+
+    &--two-reservation {
+        padding: 15px;
+        font-size: 20px;
+
+        .user {
+            padding-bottom: 15px;
+        }
+
+        .place {
+            font-size: 24px;
+            padding: 10px 0;
+
+            &--extra-place {
+                width: 100%;
+                border-top: 2px solid white;
+            }
+        }
+
+        .expiration {
+            padding: 10px 0;
+            &__date {
+                font-size: 24px;
+            }
+        }
+    }
 }
+
