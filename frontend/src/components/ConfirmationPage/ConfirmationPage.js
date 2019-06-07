@@ -33,7 +33,9 @@ class ConfirmationPage extends Component {
     }
 
     render() {
-        const extraPlace = this.props.match.params.extra_place;
+        const extraPlace = Number(this.props.match.params.extra_place);
+        console.log('EXTRA PLACE: ', extraPlace);
+        
         return (
             <section className="confirmation-container">
                 Wybrałeś miejsce:
@@ -47,7 +49,7 @@ class ConfirmationPage extends Component {
                     </button>
                     <button
                         className="buttons-section__back-btn"
-                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/${extraPlace}}`)}}
+                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/0`)}} // COME BACK!!!
                     >
                         COFNIJ
                     </button>

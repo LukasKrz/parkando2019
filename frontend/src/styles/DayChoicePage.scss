@@ -1,6 +1,72 @@
-.day-btn {
-    &--disabled {
-        cursor: auto;
-        background-color: red;
+.day-choice-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #32B0E5;
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+
+    &__date,
+    &__no-place-info {
+        font-size: 20px;
+        line-height: 25px;
+        text-transform: none;
+    }
+
+    &__day-buttons {
+        height: 60vh;
+        max-height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 20px auto;
+    }
+
+    &__log-out-btn {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        color: #fff;
+        border: none;
+        width: 120px;
+        outline: none;
+        box-sizing: border-box;
+        padding: 10px;
+        margin: 20px auto;
+        background-color: #E04436;
+    }
+
+    .day-buttons {
+        .day-btn {
+            background-color: #3498DB;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            color: #fff;
+            border: none;
+            width: 150px;
+            outline: none;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 10px auto;
+
+            &--disabled {
+                cursor: auto;
+                background-color: lightgray;
+                cursor: auto;
+                color: grey;
+            }
+        }
     }
 }
+

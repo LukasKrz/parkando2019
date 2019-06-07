@@ -27,7 +27,7 @@ class FinalConfirmationPage extends Component {
                 <div className="confirmation-container__enjoy">Miłego parkowania!</div>
                 <div className="confirmation-container__enjoy">
                     {`* Dodatkowo możesz zarezerwować miejsce na jeden dzień
-                    ${this.props.userType === 'Dzienny'
+                    ${this.props.userType === 'dzienne'
                         ? ' w sob lub niedz '
                         : ' od pon do pt '
                     }`}

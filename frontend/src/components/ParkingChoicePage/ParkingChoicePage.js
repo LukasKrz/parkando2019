@@ -15,18 +15,17 @@ class ParkingChoicePage extends Component {
         e.preventDefault();
         this.props.history.push(`/choice/${this.props.match.params.card_id}/${this.props.match.params.extra_place}`)
         // przejscie do wyboru miejsca dodatkowego
-        // this.props.history.push(`/choice/${this.props.match.params.card_id}/${this.props.match.params.extra_place}`)
     }
 
-    // componentWillMount() {
-    //     fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
-    //     .then(response => response.json())
-    //       .then(data => {
-    //         let emptySpacesFromBack = [];
-    //         data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
-    //         this.setState({emptySpaces: emptySpacesFromBack});
-    //       })
-    //   }
+    componentWillMount() {
+        fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
+        .then(response => response.json())
+          .then(data => {
+            let emptySpacesFromBack = [];
+            data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+            this.setState({emptySpaces: emptySpacesFromBack});
+          })
+      }
 
       getEmptyExtraPlaces = (day) => {
         let emptyExtraSpaces;
@@ -61,14 +60,13 @@ class ParkingChoicePage extends Component {
 
     render() {
         const emptyExtra = this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place));
-        console.log('empty from App in ParkingChoice: ', this.props.emptySpaces);
         return (
             <section className="parking-choice-container">
                 <div className="parking-choice-container__map map">
                     <button className="map__parking-btn parking-btn parking-btn--active parking-btn--active-1" id={1} onClick={this.handleClick}>
                         <span className="parking-btn__number">{
                             Number(this.props.match.params.extra_place) === 0
-                            ? this.props.emptySpaces.length
+                            ? this.state.emptySpaces.length
                             : emptyExtra.length  
                             }</span>
                         <img src={emptyPin} alt='pin wyboru parkingu' />

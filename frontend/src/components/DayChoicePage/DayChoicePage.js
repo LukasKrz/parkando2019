@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import { withRouter } from "react-router-dom";
 
@@ -22,10 +23,12 @@ class DayChoicePage extends Component {
     componentWillMount() {
         //TODO GET from DB, backend
         console.log('dayPlacesMap: ', dayPlacesMap.pon);
-        const isAnyFreePlace = this.props.userType === "Dzienny"
-            ? !(dayPlacesMap.sob.length + dayPlacesMap.niedz.length === 6)
-            : !(dayPlacesMap.pon.length + dayPlacesMap.wt.length + dayPlacesMap.sr.length + dayPlacesMap.czw.length + dayPlacesMap.pt.length === 15);
-        this.setState({
+        
+        const isAnyFreePlace = this.props.userType === "dzienne"
+            ? (dayPlacesMap.sob.length + dayPlacesMap.niedz.length === 0)
+            : (dayPlacesMap.pon.length + dayPlacesMap.wt.length + dayPlacesMap.sr.length + dayPlacesMap.czw.length + dayPlacesMap.pt.length === 0);
+        
+            this.setState({
             pon: dayPlacesMap.pon,
             wt: dayPlacesMap.wt,
             sr: dayPlacesMap.sr,
@@ -53,9 +56,22 @@ class DayChoicePage extends Component {
 
     render() {
         return (
-            <section className="day-choice-container">
+            this.state.noPlace
+            ? <section className="day-choice-container">
+                <span className="day-choice-container__no-place-info">PRZYKRO NAM, NIE MA DODATKOWYCH WOLNYCH MIEJSC NA NAJBLIŻSZY TYDZIEŃ</span>
+                <button
+                    className="day-choice-container__log-out-btn"
+                    onClick={(e) => {e.preventDefault(); this.props.history.push(`/`)}}
+                >
+                    WYLOGUJ
+                </button>
+            </section>
+            : <section className="day-choice-container">
                 Wybierz dzień
-                {this.props.userType === "Dzienny"
+                <p className="day-choice-container__date">
+                    {`rezerwacja parkingu na jeden dzień tygodnia ważna do ${moment().add(6, 'd').format('DD.MM.YYYY')}`}
+                </p>
+                {this.props.userType === "dzienne"
                     ? <div className="day-choice-container__day-buttons day-buttons">
                         <SingleDayButton
                             isNoPlace={this.state.sob.length === 0}
@@ -96,7 +112,6 @@ class DayChoicePage extends Component {
                         />
                     </div>
                 }
-                {this.state.noPlace && <span>PRZYKRO NAM NIE MA JUŻ WOLNYCH MIEJSC</span>}
             </section>
         )
     }

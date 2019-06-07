@@ -23,25 +23,20 @@ class ChoicePage extends Component {
         }        
     }
 
-    // componentWillMount() {
-    //     fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
-    //     .then(response => response.json())
-    //       .then(data => {
-    //         // console.log('TYP: ', this.props.userType);
-    //         console.log('LISTA: ', data);
-    //         let emptySpacesFromBack = [];
-    //         data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
-    //         console.log('WYBRANE: ', emptySpacesFromBack);
- 
-    //         this.setState({emptySpaces: emptySpacesFromBack});
-    //       })
-    //     // this.setState({emptySpaces: this.props.getEmptySpaces(this.props.userType)});
-    //     this.getEmptyExtraPlaces(1);
-    //   }
+    componentWillMount() {
+        fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
+        .then(response => response.json())
+          .then(data => {
+            let emptySpacesFromBack = [];
+            data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+            this.setState({emptySpaces: emptySpacesFromBack});
+          })
+        this.getEmptyExtraPlaces(1);
+      }
 
     checkIfParkingIsOccupied = (number) => {
         return Number(this.props.match.params.extra_place) === 0
-        ? !this.props.emptySpaces.some(space => space === number)
+        ? !this.state.emptySpaces.some(space => space === number)
         : !this.state.extraSpaces.some(space => space === number)
     }
 
@@ -79,87 +74,95 @@ class ChoicePage extends Component {
     }
 
     render() {
-        console.log('empty from App in ChoicePage: ', this.props.emptySpaces);
         return (
             <section className="choice-page-container">
                 <div className="choice-page-container__map-details map-details">
                 <SpaceInput
                         number={10}
-                        // emptySpaces={this.props.emptySpaces}
-                        // handleClick={this.handleClick}
-                        occupied={true}
+                        occupied={
+                            Number(this.props.match.params.extra_place) === 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(10)
+                        }
                     />
                     <SpaceInput
                         number={9}
-                        // emptySpaces={this.props.emptySpaces}
-                        // handleClick={this.handleClick}
-                        occupied={true}
+                        occupied={
+                            Number(this.props.match.params.extra_place) === 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(9)
+                        }
                     />
                     <SpaceInput
                         number={8}
-                        // emptySpaces={this.props.emptySpaces}
-                        // handleClick={this.handleClick}
-                        occupied={true}
+                        occupied={
+                            Number(this.props.match.params.extra_place) === 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(8)
+                        }
                     />
                     <SpaceInput
                         number={7}
-                        occupiedSpaces={this.props.occupiedSpaces}
                         handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(7)}
+                        occupied={
+                            Number(this.props.match.params.extra_place) !== 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(7)
+                        }
                     />
                     <SpaceInput
                         number={6}
-                        occupiedSpaces={this.props.occupiedSpaces}
                         handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(6)}
+                        occupied={
+                            Number(this.props.match.params.extra_place) !== 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(6)
+                        }
                     />
                     <SpaceInput
                         number={5}
-                        occupiedSpaces={this.props.occupiedSpaces}
                         handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(5)}
+                        occupied={
+                            Number(this.props.match.params.extra_place) !== 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(5)
+                        }
                     />
                     <SpaceInput
                         number={4}
-                        occupiedSpaces={this.props.occupiedSpaces}
                         handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(4)}
+                        occupied={
+                            Number(this.props.match.params.extra_place) !== 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(4)
+                        }
                     />
                     <SpaceInput
                         number={3}
-                        occupiedSpaces={this.props.occupiedSpaces}
                         handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(3)}
+                        occupied={
+                            Number(this.props.match.params.extra_place) !== 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(3)
+                        }
                     />
                     <SpaceInput
                         number={2}
-                        occupiedSpaces={this.props.occupiedSpaces}
                         handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(2)}
+                        occupied={
+                            Number(this.props.match.params.extra_place) !== 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(2)
+                        }
                     />
                     <SpaceInput
                         number={1}
-                        occupiedSpaces={this.props.occupiedSpaces}
                         handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(1)}
-                    />
-                    <SpaceInput
-                        number={8}
-                        occupiedSpaces={this.props.occupiedSpaces}
-                        handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(8)}
-                    />
-                    <SpaceInput
-                        number={9}
-                        occupiedSpaces={this.props.occupiedSpaces}
-                        handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(9)}
-                    />
-                    <SpaceInput
-                        number={10}
-                        occupiedSpaces={this.props.occupiedSpaces}
-                        handleClick={this.handleClick}
-                        occupied={this.checkIfParkingIsOccupied(10)}
+                        occupied={
+                            Number(this.props.match.params.extra_place) !== 0
+                            ? true
+                            : this.checkIfParkingIsOccupied(1)
+                        }
                     />
                 </div>
         </section>

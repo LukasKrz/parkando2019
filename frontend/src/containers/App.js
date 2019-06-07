@@ -21,9 +21,8 @@ class App extends Component {
     user_type: '',
     expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
-    userSurname: '',
-    emptySpaces: [],
-  }
+    userSurname: ''
+ }
 
   choiceHandler = (number) => {
     this.setState({
@@ -38,20 +37,6 @@ class App extends Component {
       userName: userName,
       userSurname: userSurname,
       park_place_id: placeId
-    })
-    this.getEmptySpaces(userType)
-  }
-
-  getEmptySpaces = (userType) => {
-    fetch(`/miejsca/dostepnepodstawowe/${userType}`)
-      .then(response => response.json())
-      .then(data => {
-        let emptySpacesFromBack = [];
-        console.log('DATA: ', data);
-        
-        data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
-        this.setState({emptySpaces: emptySpacesFromBack});
-        // return emptySpacesFromBack;
     })
   }
 
@@ -91,7 +76,6 @@ class App extends Component {
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
                   userType={this.state.user_type}
-                  emptySpaces={this.state.emptySpaces}
                 />}
           />
           <Route
