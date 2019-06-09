@@ -18,10 +18,10 @@ import java.util.Optional;
 @RequestMapping("/api/")
 public class StudentController {
 
-    @RequestMapping(value = "studenci/walidacja/{card_id}", method = RequestMethod.GET)
-    public StudentZwalidowanyDO validateStudent(@PathVariable Long card_id) {
-        return studentService.validateStudent(card_id);
-    }
+//    @RequestMapping(value = "studenci/walidacja/{card_id}", method = RequestMethod.GET)
+//    public StudentZwalidowanyDO validateStudent(@PathVariable Long card_id) {
+//        return studentService.validateStudent(card_id);
+//    }
 
     @RequestMapping(value = "studenci/walidacja", method = RequestMethod.POST)
     public StudentZwalidowanyDO validateStudentAndCheckMiejsce(@RequestBody StudentDoWalidacjiDO studentDoWalidacjiDO) {

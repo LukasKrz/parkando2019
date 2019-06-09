@@ -52,12 +52,12 @@ public class MiejscaController {
 
     @RequestMapping(value = "miejsca/rezerwacjadodatkowe/dzienne/{id}", method = RequestMethod.PUT)
     public MiejsceDodatkoweDzienne bookDodatkoweD(@PathVariable Long id, @RequestBody CardIdDO cardIdDO) {
-        return miejsceService.bookDodatkoweD(id, cardIdDO);
+        return miejsceService.bookDodatkoweTydzienDlaZaocznych(id, cardIdDO);
     }
 
     @RequestMapping(value = "miejsca/rezerwacjadodatkowe/zaoczne/{id}", method = RequestMethod.PUT)
     public MiejsceDodatkoweDzienne bookDodatkoweZ(@PathVariable Long id, @RequestBody CardIdDO cardIdDO) {
-        return miejsceService.bookDodatkoweZ(id, cardIdDO);
+        return miejsceService.bookDodatkoweWeekendDlaDziennych(id, cardIdDO);
     }
 
     @RequestMapping(value = "miejsca/podstawoweall", method = RequestMethod.GET)
@@ -67,6 +67,6 @@ public class MiejscaController {
 
     @RequestMapping(value = "miejsca/dodatkoweall", method = RequestMethod.GET)
     public List<MiejsceDodatkoweDzienne> listDodatkowe() {
-        return miejsceService.listDodatkowe();
+        return miejsceService.listDodatkoweTydzienDlaZaocznych();
     }
 }
