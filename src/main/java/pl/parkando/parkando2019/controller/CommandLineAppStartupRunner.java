@@ -3,12 +3,12 @@ package pl.parkando.parkando2019.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import pl.parkando.parkando2019.model.MiejsceDodatkoweDzienne;
-import pl.parkando.parkando2019.model.MiejsceDodatkoweZaoczne;
+import pl.parkando.parkando2019.model.MiejsceDodatkoweTydzien;
+import pl.parkando.parkando2019.model.MiejsceDodatkoweWeekend;
 import pl.parkando.parkando2019.model.MiejscePodstawowe;
 import pl.parkando.parkando2019.model.Student;
-import pl.parkando.parkando2019.repository.MiejsceDodatkoweDzienneRepository;
-import pl.parkando.parkando2019.repository.MiejsceDodatkoweZaoczneRepository;
+import pl.parkando.parkando2019.repository.MiejsceDodatkoweTydzienRepository;
+import pl.parkando.parkando2019.repository.MiejsceDodatkoweWeekendRepository;
 import pl.parkando.parkando2019.repository.MiejscePodstawoweRepository;
 import pl.parkando.parkando2019.repository.StudentRepository;
 
@@ -22,16 +22,16 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     private MiejscePodstawoweRepository miejscePodstawoweRepository;
 
-    private MiejsceDodatkoweDzienneRepository miejsceDodatkoweTydzienDlaZaocznychRepository;
+    private MiejsceDodatkoweTydzienRepository miejsceDodatkoweTydzienDlaZaocznychRepository;
 
-    private MiejsceDodatkoweZaoczneRepository miejsceDodatkoweWeekendDlaDziennychRepository;
+    private MiejsceDodatkoweWeekendRepository miejsceDodatkoweWeekendDlaDziennychRepository;
 
     private StudentRepository studentRepository;
 
     @Autowired
     public CommandLineAppStartupRunner(MiejscePodstawoweRepository miejscePodstawoweRepository,
-                                       MiejsceDodatkoweDzienneRepository miejsceDodatkoweTydzienDlaZaocznychRepository,
-                                       MiejsceDodatkoweZaoczneRepository miejsceDodatkoweWeekendDlaDziennychRepository,
+                                       MiejsceDodatkoweTydzienRepository miejsceDodatkoweTydzienDlaZaocznychRepository,
+                                       MiejsceDodatkoweWeekendRepository miejsceDodatkoweWeekendDlaDziennychRepository,
                                        StudentRepository studentRepository) {
         this.miejscePodstawoweRepository = miejscePodstawoweRepository;
         this.miejsceDodatkoweTydzienDlaZaocznychRepository = miejsceDodatkoweTydzienDlaZaocznychRepository;
@@ -48,15 +48,15 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     }
 
     private void fillMiejscaDodatkoweTydzienDlaZaocznych() {
-        List<MiejsceDodatkoweDzienne> miejscaDodatkowe = createMiejscaDodatkoweTydzienDlaZaocznych();
-        for (MiejsceDodatkoweDzienne miejsce : miejscaDodatkowe) {
+        List<MiejsceDodatkoweTydzien> miejscaDodatkowe = createMiejscaDodatkoweTydzienDlaZaocznych();
+        for (MiejsceDodatkoweTydzien miejsce : miejscaDodatkowe) {
             miejsceDodatkoweTydzienDlaZaocznychRepository.save(miejsce);
         }
     }
 
     private void fillMiejscaDodatkoweWeekendDlaDziennych() {
-        List<MiejsceDodatkoweZaoczne> miejscaDodatkowe = createMiejscaDodatkoweWeekendDlaDziennych();
-        for (MiejsceDodatkoweZaoczne miejsce : miejscaDodatkowe) {
+        List<MiejsceDodatkoweWeekend> miejscaDodatkowe = createMiejscaDodatkoweWeekendDlaDziennych();
+        for (MiejsceDodatkoweWeekend miejsce : miejscaDodatkowe) {
             miejsceDodatkoweWeekendDlaDziennychRepository.save(miejsce);
         }
     }
@@ -89,20 +89,20 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         return miejsca;
     }
 
-    private List<MiejsceDodatkoweZaoczne> createMiejscaDodatkoweWeekendDlaDziennych() {
-        MiejsceDodatkoweZaoczne m8 = new MiejsceDodatkoweZaoczne("A", 8L, 111L, LocalDate.now().minusDays(3L), 111L, LocalDate.now().minusDays(1111L));
-        MiejsceDodatkoweZaoczne m9 = new MiejsceDodatkoweZaoczne("A", 9L, 111L, LocalDate.now().minusDays(1111L), 111L, LocalDate.now().minusDays(1111L));
-        MiejsceDodatkoweZaoczne m10 = new MiejsceDodatkoweZaoczne("A", 10L, 111L, LocalDate.now().minusDays(1111L), 115L, LocalDate.now().minusDays(1L));
-        List<MiejsceDodatkoweZaoczne> miejsca = new ArrayList<>();
+    private List<MiejsceDodatkoweWeekend> createMiejscaDodatkoweWeekendDlaDziennych() {
+        MiejsceDodatkoweWeekend m8 = new MiejsceDodatkoweWeekend("A", 8L, 111L, LocalDate.now().minusDays(3L), 111L, LocalDate.now().minusDays(1111L));
+        MiejsceDodatkoweWeekend m9 = new MiejsceDodatkoweWeekend("A", 9L, 111L, LocalDate.now().minusDays(1111L), 111L, LocalDate.now().minusDays(1111L));
+        MiejsceDodatkoweWeekend m10 = new MiejsceDodatkoweWeekend("A", 10L, 111L, LocalDate.now().minusDays(1111L), 115L, LocalDate.now().minusDays(1L));
+        List<MiejsceDodatkoweWeekend> miejsca = new ArrayList<>();
         miejsca.addAll(Arrays.asList(m8, m9, m10));
         return miejsca;
     }
 
-    private List<MiejsceDodatkoweDzienne> createMiejscaDodatkoweTydzienDlaZaocznych() {
-        MiejsceDodatkoweDzienne m8 = new MiejsceDodatkoweDzienne("A", 8L, 106L, LocalDate.now().minusDays(2L), 102L, LocalDate.now(), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L));
-        MiejsceDodatkoweDzienne m9 = new MiejsceDodatkoweDzienne("A", 9L, 106L, LocalDate.now().minusDays(1106L), 106L , LocalDate.now().minusDays(1106L), 103L, LocalDate.now().minusDays(4L), 104L, LocalDate.now().minusDays(1L),106L, LocalDate.now().minusDays(1106L));
-        MiejsceDodatkoweDzienne m10 = new MiejsceDodatkoweDzienne("A", 10L, 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 108L, LocalDate.now());
-        List<MiejsceDodatkoweDzienne> miejsca = new ArrayList<>();
+    private List<MiejsceDodatkoweTydzien> createMiejscaDodatkoweTydzienDlaZaocznych() {
+        MiejsceDodatkoweTydzien m8 = new MiejsceDodatkoweTydzien("A", 8L, 106L, LocalDate.now().minusDays(2L), 102L, LocalDate.now(), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L));
+        MiejsceDodatkoweTydzien m9 = new MiejsceDodatkoweTydzien("A", 9L, 106L, LocalDate.now().minusDays(1106L), 106L , LocalDate.now().minusDays(1106L), 103L, LocalDate.now().minusDays(4L), 104L, LocalDate.now().minusDays(1L),106L, LocalDate.now().minusDays(1106L));
+        MiejsceDodatkoweTydzien m10 = new MiejsceDodatkoweTydzien("A", 10L, 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 108L, LocalDate.now());
+        List<MiejsceDodatkoweTydzien> miejsca = new ArrayList<>();
         miejsca.addAll(Arrays.asList(m8, m9, m10));
         return miejsca;
     }

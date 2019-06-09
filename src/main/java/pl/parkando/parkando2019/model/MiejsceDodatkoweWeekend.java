@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "MIEJSCEDODATKOWEZAOCZNE")
-public class MiejsceDodatkoweZaoczne {
+@Table(name = "MIEJSCEDODATKOWEWEEKEND")
+public class MiejsceDodatkoweWeekend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +34,10 @@ public class MiejsceDodatkoweZaoczne {
     @Column(name = "RESERVATIONDATENIEDZIELA")
     LocalDate reservationDateNiedziela;
 
-    public MiejsceDodatkoweZaoczne() {
+    public MiejsceDodatkoweWeekend() {
     }
 
-    public MiejsceDodatkoweZaoczne(String parkId, Long parkPlaceId, Long studentCardIdSobota, LocalDate reservationDateSobota, Long studentCardIdNiedziela, LocalDate reservationDateNiedziela) {
+    public MiejsceDodatkoweWeekend(String parkId, Long parkPlaceId, Long studentCardIdSobota, LocalDate reservationDateSobota, Long studentCardIdNiedziela, LocalDate reservationDateNiedziela) {
         this.parkId = parkId;
         this.parkPlaceId = parkPlaceId;
         this.studentCardIdSobota = studentCardIdSobota;

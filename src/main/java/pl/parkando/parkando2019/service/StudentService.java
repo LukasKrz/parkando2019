@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import pl.parkando.parkando2019.model.MiejsceDodatkoweDzienne;
-import pl.parkando.parkando2019.model.MiejsceDodatkoweZaoczne;
+import pl.parkando.parkando2019.model.MiejsceDodatkoweTydzien;
+import pl.parkando.parkando2019.model.MiejsceDodatkoweWeekend;
 import pl.parkando.parkando2019.model.MiejscePodstawowe;
 import pl.parkando.parkando2019.model.Student;
 import pl.parkando.parkando2019.repository.StudentRepository;
@@ -24,7 +24,7 @@ public class StudentService {
     @Autowired
     private MiejsceService miejsceService;
 
-//    public StudentZwalidowanyDO validateStudent(Long card_id) {
+//    public StudentZwalidowanyDO validateStudent(Long card_id) {  // TODO LuKr remove commented code
 //        List<Student> studentList = studentRepository.findAll();
 //        Student studentFromDb = studentList.stream().filter(student -> student.getCardId().equals(card_id)).findFirst().get();
 //        StudentDoWalidacjiDO studentDoWalidacjiDO = createStudentDOWalidacji(studentFromDb);
@@ -90,8 +90,8 @@ public class StudentService {
 
     // TODO LuKr here we set date of reservation, not date of chosen day !!! - to be discussed
     private void checkAndFillMiejsceDodatkowe(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO) {
-        List<MiejsceDodatkoweZaoczne> miejscaDodatkoweWeekendDlaDziennych = miejsceService.listDodatkoweWeekendDlaDziennych();
-        List<MiejsceDodatkoweDzienne> miejscaDodatkoweTydzienDlaZaocznych = miejsceService.listDodatkoweTydzienDlaZaocznych();
+        List<MiejsceDodatkoweWeekend> miejscaDodatkoweWeekendDlaDziennych = miejsceService.listDodatkoweWeekendDlaDziennych();
+        List<MiejsceDodatkoweTydzien> miejscaDodatkoweTydzienDlaZaocznych = miejsceService.listDodatkoweTydzienDlaZaocznych();
         if (studentZwalidowanyDO.getUser_type().equals("dzienne")){
             if (hasStudentDziennyMiejsceDodatkoweOnSobota(studentDoWalidacjiDO, miejscaDodatkoweWeekendDlaDziennych)) {
                 fillMiejsceDodatkoweSobota(studentDoWalidacjiDO, studentZwalidowanyDO, miejscaDodatkoweWeekendDlaDziennych);
@@ -135,42 +135,42 @@ public class StudentService {
                 && miejscePodstawowe.getDataRezerwacjiZaoczny().isAfter(LocalDate.now().minusDays(7L)));
     }
 
-    private boolean hasStudentDziennyMiejsceDodatkoweOnSobota(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweZaoczne> miejscaDodatkoweZaoczneDlaDziennych) {
+    private boolean hasStudentDziennyMiejsceDodatkoweOnSobota(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweWeekend> miejscaDodatkoweZaoczneDlaDziennych) {
         return miejscaDodatkoweZaoczneDlaDziennych.stream().anyMatch(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdSobota().equals(studentDoWalidacjiDO.getCard_id())
                 && miejsceDodatkowe.getReservationDateSobota().isAfter(LocalDate.now().minusDays(7L)));
     }
 
-    private boolean hasStudentDziennyMiejsceDodatkoweOnNiedziela(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweZaoczne> miejscaDodatkoweZaoczneDlaDziennych) {
+    private boolean hasStudentDziennyMiejsceDodatkoweOnNiedziela(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweWeekend> miejscaDodatkoweZaoczneDlaDziennych) {
         return miejscaDodatkoweZaoczneDlaDziennych.stream().anyMatch(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdNiedziela().equals(studentDoWalidacjiDO.getCard_id())
                 && miejsceDodatkowe.getReservationDateNiedziela().isAfter(LocalDate.now().minusDays(7L)));
     }
 
-    private boolean hasStudentZaocznyMiejsceDodatkoweOnPoniedzialek(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private boolean hasStudentZaocznyMiejsceDodatkoweOnPoniedzialek(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         return miejscaDodatkoweDzienneDlaZaocznych.stream().anyMatch(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdPoniedzialek().equals(studentDoWalidacjiDO.getCard_id())
                 && miejsceDodatkowe.getReservationDatePoniedzialek().isAfter(LocalDate.now().minusDays(7L)));
     }
 
-    private boolean hasStudentZaocznyMiejsceDodatkoweOnWtorek(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private boolean hasStudentZaocznyMiejsceDodatkoweOnWtorek(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         return miejscaDodatkoweDzienneDlaZaocznych.stream().anyMatch(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdWtorek().equals(studentDoWalidacjiDO.getCard_id())
                 && miejsceDodatkowe.getReservationDateWtorek().isAfter(LocalDate.now().minusDays(7L)));
     }
 
-    private boolean hasStudentZaocznyMiejsceDodatkoweOnSroda(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private boolean hasStudentZaocznyMiejsceDodatkoweOnSroda(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         return miejscaDodatkoweDzienneDlaZaocznych.stream().anyMatch(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdSroda().equals(studentDoWalidacjiDO.getCard_id())
                 && miejsceDodatkowe.getReservationDateSroda().isAfter(LocalDate.now().minusDays(7L)));
     }
 
-    private boolean hasStudentZaocznyMiejsceDodatkoweOnCzwartek(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private boolean hasStudentZaocznyMiejsceDodatkoweOnCzwartek(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         return miejscaDodatkoweDzienneDlaZaocznych.stream().anyMatch(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdCzwartek().equals(studentDoWalidacjiDO.getCard_id())
                 && miejsceDodatkowe.getReservationDateCzwartek().isAfter(LocalDate.now().minusDays(7L)));
     }
 
-    private boolean hasStudentZaocznyMiejsceDodatkoweOnPiatek(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private boolean hasStudentZaocznyMiejsceDodatkoweOnPiatek(StudentDoWalidacjiDO studentDoWalidacjiDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         return miejscaDodatkoweDzienneDlaZaocznych.stream().anyMatch(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdPiatek().equals(studentDoWalidacjiDO.getCard_id())
                 && miejsceDodatkowe.getReservationDatePiatek().isAfter(LocalDate.now().minusDays(7L)));
     }
 
-    private void fillMiejsceDodatkoweSobota(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweZaoczne> miejscaDodatkoweZaoczneDlaDziennych) {
+    private void fillMiejsceDodatkoweSobota(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweWeekend> miejscaDodatkoweZaoczneDlaDziennych) {
         studentZwalidowanyDO.setParkPlaceIdDodatkowe(miejscaDodatkoweZaoczneDlaDziennych.stream()
                 .filter(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdSobota().equals(studentDoWalidacjiDO.getCard_id())).findFirst().get().getParkPlaceId());
         studentZwalidowanyDO.setReservationDateDodatkowe(miejscaDodatkoweZaoczneDlaDziennych.stream()
@@ -178,7 +178,7 @@ public class StudentService {
         studentZwalidowanyDO.setDayOfWeek("sobota");
     }
 
-    private void fillMiejsceDodatkoweNiedziela(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweZaoczne> miejscaDodatkoweZaoczneDlaDziennych) {
+    private void fillMiejsceDodatkoweNiedziela(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweWeekend> miejscaDodatkoweZaoczneDlaDziennych) {
         studentZwalidowanyDO.setParkPlaceIdDodatkowe(miejscaDodatkoweZaoczneDlaDziennych.stream()
                 .filter(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdNiedziela().equals(studentDoWalidacjiDO.getCard_id())).findFirst().get().getParkPlaceId());
         studentZwalidowanyDO.setReservationDateDodatkowe(miejscaDodatkoweZaoczneDlaDziennych.stream()
@@ -186,7 +186,7 @@ public class StudentService {
         studentZwalidowanyDO.setDayOfWeek("niedziela");
     }
 
-    private void fillMiejsceDodatkowePoniedzialek(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private void fillMiejsceDodatkowePoniedzialek(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         studentZwalidowanyDO.setParkPlaceIdDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
                 .filter(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdPoniedzialek().equals(studentDoWalidacjiDO.getCard_id())).findFirst().get().getParkPlaceId());
         studentZwalidowanyDO.setReservationDateDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
@@ -194,7 +194,7 @@ public class StudentService {
         studentZwalidowanyDO.setDayOfWeek("poniedzialek");
     }
 
-    private void fillMiejsceDodatkoweWtorek(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private void fillMiejsceDodatkoweWtorek(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         studentZwalidowanyDO.setParkPlaceIdDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
                 .filter(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdWtorek().equals(studentDoWalidacjiDO.getCard_id())).findFirst().get().getParkPlaceId());
         studentZwalidowanyDO.setReservationDateDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
@@ -202,7 +202,7 @@ public class StudentService {
         studentZwalidowanyDO.setDayOfWeek("wtorek");
     }
 
-    private void fillMiejsceDodatkoweSroda(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private void fillMiejsceDodatkoweSroda(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         studentZwalidowanyDO.setParkPlaceIdDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
                 .filter(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdSroda().equals(studentDoWalidacjiDO.getCard_id())).findFirst().get().getParkPlaceId());
         studentZwalidowanyDO.setReservationDateDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
@@ -210,7 +210,7 @@ public class StudentService {
         studentZwalidowanyDO.setDayOfWeek("sroda");
     }
 
-    private void fillMiejsceDodatkoweCzwartek(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private void fillMiejsceDodatkoweCzwartek(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         studentZwalidowanyDO.setParkPlaceIdDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
                 .filter(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdCzwartek().equals(studentDoWalidacjiDO.getCard_id())).findFirst().get().getParkPlaceId());
         studentZwalidowanyDO.setReservationDateDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
@@ -218,7 +218,7 @@ public class StudentService {
         studentZwalidowanyDO.setDayOfWeek("czwartek");
     }
 
-    private void fillMiejsceDodatkowePiatek(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweDzienne> miejscaDodatkoweDzienneDlaZaocznych) {
+    private void fillMiejsceDodatkowePiatek(StudentDoWalidacjiDO studentDoWalidacjiDO, StudentZwalidowanyDO studentZwalidowanyDO, List<MiejsceDodatkoweTydzien> miejscaDodatkoweDzienneDlaZaocznych) {
         studentZwalidowanyDO.setParkPlaceIdDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
                 .filter(miejsceDodatkowe -> miejsceDodatkowe.getStudentCardIdPiatek().equals(studentDoWalidacjiDO.getCard_id())).findFirst().get().getParkPlaceId());
         studentZwalidowanyDO.setReservationDateDodatkowe(miejscaDodatkoweDzienneDlaZaocznych.stream()
