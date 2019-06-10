@@ -2,8 +2,8 @@
     border: none;
     outline: none;
     position: fixed;
-    top: 22px;
-    right: calc(5vw + 2px);
+    top: 5px;
+    right: 5px;
     background: url(../images/infio.png);
     background-size: 40px 40px;
     width: 40px;
@@ -36,6 +36,7 @@
         background-color: rgba(255, 250, 227, 0.3);
     }
 }
+
 .modal {
     position: absolute;
     top: 20px;
