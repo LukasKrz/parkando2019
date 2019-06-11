@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { withRouter } from "react-router-dom";
 
-import dayPlacesMap from '../../mocks/dayPlacesMap.js';
-
 import emptyPin from '../../images/pusty_pin.png';
 import InfoButton from '../InfoModal/InfoButton.js';
 
@@ -18,48 +16,20 @@ class ParkingChoicePage extends Component {
         this.props.history.push(`/choice/${this.props.match.params.card_id}/${this.props.match.params.extra_place}`)
     }
 
-    // getDayNumber = (stringDay) => {
-    //     switch(stringDay) {
-    //         case 'poniedzialek': 
-    //             return 1;
-    //         case 'wtorek':
-    //             return 2;
-    //         case 'sroda':
-    //             return 3;
-    //         case 'czwartek':
-    //             return 4;
-    //         case 'piatek':
-    //             return 5;
-    //         case 'sobota':
-    //             return 6;
-    //         case 'niedziela':
-    //             return 7;
-    //         default:
-    //             return 0
-    //     }
-    // }
-
     componentWillMount() {
         fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
-        .then(response => response.json())
-          .then(data => {
-            let emptySpacesFromBack = [];
-            data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
-            this.setState({emptySpaces: emptySpacesFromBack});
-          });
-
-          fetch(`/miejsca/dostepnedodatkowe/${this.props.userType}`)
-          .then(response => response.json())
+            .then(response => response.json())
             .then(data => {
-                console.log('DATA', data, typeof data, data.sobota);
-        this.setState({extraSpaces: this.getEmptyExtraPlaces(data, Number(this.props.match.params.extra_place))}); //TODO -> 1 to poniedzialek
-
-        // this.setState({extraSpaces: data.sobota}); //TODO -> 1 to poniedzialek
-
+                let emptySpacesFromBack = [];
+                data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+                this.setState({emptySpaces: emptySpacesFromBack});
             });
 
-
-        // this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
+          fetch(`/miejsca/dostepnedodatkowe/${this.props.userType}`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({extraSpaces: this.getEmptyExtraPlaces(data, Number(this.props.match.params.extra_place))});
+            });
       }
 
       getEmptyExtraPlaces = (data, day) => {

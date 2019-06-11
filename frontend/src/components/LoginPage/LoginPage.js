@@ -77,7 +77,8 @@ class LoginPage extends Component {
                     name: this.state.userName,
                     surname: this.state.userSurname
                 })
-            }).then(response => response.json())
+            })
+            .then(response => response.json())
             .then(data => {
                 if(data.card_id !== null) {
                     this.setState({
@@ -91,33 +92,27 @@ class LoginPage extends Component {
                         }
                     })
 
-                //   this.props.logUser(data.card_id, data.name, data.surname, data.user_type, data.park_place_id);
-                //   console.log('WALIDACJA: ', data, data.reservationDatePodstawowe, data.parkPlaceIdDodatkowe, data.dayOfWeek, data.reservationDateDodatkowe);
                 const dayNum = this.getDayNumber(data.dayOfWeek);
-                console.log('dayNum', dayNum);
-                
-                  this.props.logUser(data.card_id, data.name, data.surname, data.user_type, data.park_place_id, data.reservationDatePodstawowe, data.parkPlaceIdDodatkowe, dayNum, data.reservationDateDodatkowe);
 
-                
-                  if(data.park_place_id === null) {
+                this.props.logUser(data.card_id, data.name, data.surname, data.user_type, data.park_place_id, data.reservationDatePodstawowe, data.parkPlaceIdDodatkowe, dayNum, data.reservationDateDodatkowe);
+
+                if(data.park_place_id === null) {
                     this.props.history.push(`/welcome/${data.card_id}`);
-                  } else if(data.park_place_id !== null && data.parkPlaceIdDodatkowe === null) {
+                } else if(data.park_place_id !== null && data.parkPlaceIdDodatkowe === null) {
                     this.props.history.push(`/final-confirmation/${data.card_id}/0/${data.park_place_id}`)
-                  } else if(data.park_place_id !== null && data.parkPlaceIdDodatkowe !== null) {
-                      console.log('TEST');
-                      //TODO 7 --> niedziela
+                } else if(data.park_place_id !== null && data.parkPlaceIdDodatkowe !== null) {
                     this.props.history.push(`/two-reservation/${data.card_id}/${dayNum}/${data.parkPlaceIdDodatkowe}`)
-                  }
+                }
 
-                  } else {
-                    this.setState({
-                      errors: {
+            } else {
+                this.setState({
+                    errors: {
                         userInDB: true,
-                      }
-                    })
-                  console.log('NIE MA USERA');  
-                  }
+                    }
                 })
+                  console.log('NIE MA USERA');  
+                }
+            })
             .catch(error => {
               console.log(error);
             })

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { withRouter } from "react-router-dom";
 
-import dayPlacesMap from '../../mocks/dayPlacesMap.js';
-
 import SpaceInput from './SpaceInput.js';
 import InfoButton from '../InfoModal/InfoButton.js';
 
@@ -26,24 +24,18 @@ class ChoicePage extends Component {
 
     componentWillMount() {
         fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
-        .then(response => response.json())
-          .then(data => {
-            let emptySpacesFromBack = [];
-            data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
-            this.setState({emptySpaces: emptySpacesFromBack});
-          })
+            .then(response => response.json())
+            .then(data => {
+                let emptySpacesFromBack = [];
+                data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+                this.setState({emptySpaces: emptySpacesFromBack});
+            })
 
           fetch(`/miejsca/dostepnedodatkowe/${this.props.userType}`)
-          .then(response => response.json())
+            .then(response => response.json())
             .then(data => {
-                console.log('DATA', data, typeof data, data.sobota);
-        this.setState({extraSpaces: this.getEmptyExtraPlaces(data, Number(this.props.match.params.extra_place))}); //TODO -> 1 to poniedzialek
-
-        // this.setState({extraSpaces: data.sobota}); //TODO -> 1 to poniedzialek
-
+                this.setState({extraSpaces: this.getEmptyExtraPlaces(data, Number(this.props.match.params.extra_place))}); //TODO -> 1 to poniedzialek
             });
-
-        //   this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
       }
 
     checkIfParkingIsOccupied = (number) => {

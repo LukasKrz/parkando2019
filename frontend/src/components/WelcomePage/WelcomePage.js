@@ -7,8 +7,6 @@ import InfoButton from '../InfoModal/InfoButton.js';
 
 class WelcomePage extends Component {
     render() {
-        console.log('dayOfWeek WELCOME', this.props.dayNum);
-        
         return (
             <section className="welcome-container">
                 <InfoButton history={this.props.history}/>

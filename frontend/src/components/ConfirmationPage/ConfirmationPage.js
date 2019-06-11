@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import InfoButton from '../InfoModal/InfoButton.js';
 
 class ConfirmationPage extends Component {
+    
     getDayName = (stringDay) => {
         switch(stringDay) {
             case 1: 
@@ -54,8 +55,6 @@ class ConfirmationPage extends Component {
                     console.log('ERROR: ', error);
                 })
         } else {
-            // console.log('TEEESSSSTTT!', number, this.getDayName(Number(number)));
-            
             fetch(`/miejsca/rezerwacjadodatkowe/${this.props.userType}/${number}`, {
                 method: 'PUT',
                 headers: {
@@ -78,9 +77,7 @@ class ConfirmationPage extends Component {
     }
 
     render() {
-        const extraPlace = Number(this.props.match.params.extra_place);
-        console.log('EXTRA PLACE: ', extraPlace);
-        
+        const extraPlace = Number(this.props.match.params.extra_place);        
         return (
             <section className="confirmation-container">
                 <InfoButton history={this.props.history} />
