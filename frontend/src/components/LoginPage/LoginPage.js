@@ -40,6 +40,27 @@ class LoginPage extends Component {
         }
     }
 
+    getDayNumber = (stringDay) => {
+        switch(stringDay) {
+            case 'poniedzialek': 
+                return 1;
+            case 'wtorek':
+                return 2;
+            case 'sroda':
+                return 3;
+            case 'czwartek':
+                return 4;
+            case 'piatek':
+                return 5;
+            case 'sobota':
+                return 6;
+            case 'niedziela':
+                return 7;
+            default:
+                return 0
+        }
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         const validation = this.formValidation();
@@ -70,12 +91,22 @@ class LoginPage extends Component {
                         }
                     })
 
-                  this.props.logUser(data.card_id, data.name, data.surname, data.user_type, data.park_place_id);
+                //   this.props.logUser(data.card_id, data.name, data.surname, data.user_type, data.park_place_id);
+                //   console.log('WALIDACJA: ', data, data.reservationDatePodstawowe, data.parkPlaceIdDodatkowe, data.dayOfWeek, data.reservationDateDodatkowe);
+                const dayNum = this.getDayNumber(data.dayOfWeek);
+                console.log('dayNum', dayNum);
+                
+                  this.props.logUser(data.card_id, data.name, data.surname, data.user_type, data.park_place_id, data.reservationDatePodstawowe, data.parkPlaceIdDodatkowe, dayNum, data.reservationDateDodatkowe);
 
+                
                   if(data.park_place_id === null) {
                     this.props.history.push(`/welcome/${data.card_id}`);
-                  } else {
+                  } else if(data.park_place_id !== null && data.parkPlaceIdDodatkowe === null) {
                     this.props.history.push(`/final-confirmation/${data.card_id}/0/${data.park_place_id}`)
+                  } else if(data.park_place_id !== null && data.parkPlaceIdDodatkowe !== null) {
+                      console.log('TEST');
+                      //TODO 7 --> niedziela
+                    this.props.history.push(`/two-reservation/${data.card_id}/${dayNum}/${data.parkPlaceIdDodatkowe}`)
                   }
 
                   } else {

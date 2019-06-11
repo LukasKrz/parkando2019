@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { withRouter } from "react-router-dom";
 
-import dayPlacesMap from '../../mocks/dayPlacesMap.js';
+// import dayPlacesMap from '../../mocks/dayPlacesMap.js';
 
 import SingleDayButton from './SingleDayButton.js';
 import InfoButton from '../InfoModal/InfoButton.js';
@@ -21,22 +21,63 @@ class DayChoicePage extends Component {
         noPlace: false,
     }
 
+    // componentWillMount() {
+    //     fetch(`/miejsca/dostepnepodstawowe/${this.props.userType}`)
+    //     .then(response => response.json())
+    //       .then(data => {
+    //         let emptySpacesFromBack = [];
+    //         data && data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
+    //         this.setState({emptySpaces: emptySpacesFromBack});
+    //       });
+    //     this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
+    //   }
+
+    // getDayNumber = (stringDay) => {
+    //     switch(stringDay) {
+    //         case 'poniedzialek': 
+    //             return 1;
+    //         case 'wtorek':
+    //             return 2;
+    //         case 'sroda':
+    //             return 3;
+    //         case 'czwartek':
+    //             return 4;
+    //         case 'piatek':
+    //             return 5;
+    //         case 'sobota':
+    //             return 6;
+    //         case 'niedziela':
+    //             return 7;
+    //         default:
+    //             return 0
+    //     }
+    // }
+
     componentWillMount() {
         //TODO GET from DB, backend
-        const isAnyFreePlace = this.props.userType === "dzienne"
-            ? (dayPlacesMap.sob.length + dayPlacesMap.niedz.length === 0)
-            : (dayPlacesMap.pon.length + dayPlacesMap.wt.length + dayPlacesMap.sr.length + dayPlacesMap.czw.length + dayPlacesMap.pt.length === 0);
+        fetch(`/miejsca/dostepnedodatkowe/${this.props.userType}`)
+        .then(response => response.json())
+          .then(data => {
+              console.log('DATA', data, typeof data, data.niedziela);
+
+            const isAnyFreePlace = this.props.userType === "dzienne"
+            ? (data.sobota.length + data.niedziela.length === 0)
+            : (data.poniedzialek.length + data.wtorek.length + data.sroda.length + data.czwartek.length + data.piatek.length === 0);
         
             this.setState({
-            pon: dayPlacesMap.pon,
-            wt: dayPlacesMap.wt,
-            sr: dayPlacesMap.sr,
-            czw: dayPlacesMap.czw,
-            pt: dayPlacesMap.pt,
-            sob: dayPlacesMap.sob,
-            niedz: dayPlacesMap.niedz,
+            pon: data.poniedzialek,
+                wt: data.wtorek,
+                sr: data.sroda,
+                czw: data.czwartek,
+                pt: data.piatek,
+                sob: data.sobota,
+                niedz: data.niedziela,
             noPlace: isAnyFreePlace
         })
+          });
+        // this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
+
+        
     }
 
     handleClick = (e) => {

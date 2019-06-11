@@ -32,7 +32,18 @@ class ChoicePage extends Component {
             data.map(a => emptySpacesFromBack.push(a.parkPlaceId))
             this.setState({emptySpaces: emptySpacesFromBack});
           })
-          this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
+
+          fetch(`/miejsca/dostepnedodatkowe/${this.props.userType}`)
+          .then(response => response.json())
+            .then(data => {
+                console.log('DATA', data, typeof data, data.sobota);
+        this.setState({extraSpaces: this.getEmptyExtraPlaces(data, Number(this.props.match.params.extra_place))}); //TODO -> 1 to poniedzialek
+
+        // this.setState({extraSpaces: data.sobota}); //TODO -> 1 to poniedzialek
+
+            });
+
+        //   this.setState({extraSpaces: this.getEmptyExtraPlaces(Number(this.props.match.params.extra_place))});
       }
 
     checkIfParkingIsOccupied = (number) => {
@@ -41,29 +52,29 @@ class ChoicePage extends Component {
         : !this.state.extraSpaces.some(space => space === number)
     }
 
-    getEmptyExtraPlaces = (day) => {
+    getEmptyExtraPlaces = (data, day) => {
         let emptyExtraSpaces;
         switch(day) {
             case 1: 
-                emptyExtraSpaces = dayPlacesMap.pon;
+                emptyExtraSpaces = data.poniedzialek;
                 break;
             case 2:
-                emptyExtraSpaces = dayPlacesMap.wt;
+                emptyExtraSpaces = data.wtorek;
                 break;
             case 3:
-                emptyExtraSpaces = dayPlacesMap.sr;
+                emptyExtraSpaces = data.sroda;
                 break;
             case 4:
-                emptyExtraSpaces = dayPlacesMap.czw;
+                emptyExtraSpaces = data.czwartek;
                 break;
             case 5:
-                emptyExtraSpaces = dayPlacesMap.pt;
+                emptyExtraSpaces = data.piatek;
                 break;
             case 6:
-                emptyExtraSpaces = dayPlacesMap.sob;
+                emptyExtraSpaces = data.sobota;
                 break;
             case 7:
-                emptyExtraSpaces = dayPlacesMap.niedz;
+                emptyExtraSpaces = data.niedziela;
                 break;
             default:
                 emptyExtraSpaces = [];

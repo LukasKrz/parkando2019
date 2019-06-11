@@ -13,7 +13,6 @@ import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmat
 import FinalConfirmationWithTwoReservation from '../components/ConfirmationPage/FinalConfirmationWithTwoReservation';
 import DayChoicePage from '../components/DayChoicePage/DayChoicePage';
 
-
 class App extends Component {
   state = {
     card_id: null,
@@ -21,7 +20,11 @@ class App extends Component {
     user_type: '',
     expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
-    userSurname: ''
+    userSurname: '',
+    reservationDatePodstawowe: moment().add(6, 'd').format('DD.MM.YYYY'), 
+    parkPlaceIdDodatkowe: null,
+    dayOfWeek: 0, 
+    reservationDateDodatkowe: moment().add(6, 'd').format('DD.MM.YYYY')
  }
 
   choiceHandler = (number) => {
@@ -30,17 +33,23 @@ class App extends Component {
     });
   }
 
-  logUser = (cardNumber, userName, userSurname, userType, placeId) => {
+  logUser = (cardNumber, userName, userSurname, userType, placeId, reservationDatePodstawowe, parkPlaceIdDodatkowe, dayOfWeek, reservationDateDodatkowe) => {
     this.setState({
       card_id: cardNumber,
       user_type: userType,
       userName: userName,
       userSurname: userSurname,
-      park_place_id: placeId
+      park_place_id: placeId,
+      reservationDatePodstawowe: reservationDatePodstawowe, 
+      parkPlaceIdDodatkowe: parkPlaceIdDodatkowe,
+      dayOfWeek: dayOfWeek, 
+      reservationDateDodatkowe: reservationDateDodatkowe
     })
   }
 
   render() {
+    console.log('APP: ', this.state.dayOfWeek);
+    
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
@@ -65,6 +74,7 @@ class App extends Component {
                   {...props}
                   userName={this.state.userName}
                   userType={this.state.user_type}
+                  dayNum={this.state.dayOfWeek}
                 />
             }
           />
