@@ -17,7 +17,7 @@ class WelcomePage extends Component {
                 <div className="welcome-container__user-type">Rezerwacja będzie ważna do <span>{moment().add(6, 'd').format('DD.MM.YYYY')}</span></div>
                 <button
                     className="welcome-container__go-btn"
-                    onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/${this.props.dayNum}`)}}
+                    onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/0`)}}
                 >
                     Wybierz miejsce
                 </button>
