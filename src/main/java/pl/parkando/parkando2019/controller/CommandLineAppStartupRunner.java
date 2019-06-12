@@ -92,7 +92,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     private List<MiejsceDodatkoweWeekend> createMiejscaDodatkoweWeekendDlaDziennych() {
         MiejsceDodatkoweWeekend m8 = new MiejsceDodatkoweWeekend("A", 8L, 111L, LocalDate.now().minusDays(3L), 111L, LocalDate.now().minusDays(1111L));
         MiejsceDodatkoweWeekend m9 = new MiejsceDodatkoweWeekend("A", 9L, 111L, LocalDate.now().minusDays(1111L), 111L, LocalDate.now().minusDays(1111L));
-        MiejsceDodatkoweWeekend m10 = new MiejsceDodatkoweWeekend("A", 10L, 111L, LocalDate.now().minusDays(1111L), 115L, LocalDate.now().minusDays(1L));
+        MiejsceDodatkoweWeekend m10 = new MiejsceDodatkoweWeekend("A", 10L, 111L, LocalDate.now().minusDays(1111L), 107L, LocalDate.now().minusDays(1L));
         List<MiejsceDodatkoweWeekend> miejsca = new ArrayList<>();
         miejsca.addAll(Arrays.asList(m8, m9, m10));
         return miejsca;
@@ -114,7 +114,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         Student s4 = new Student(104L, "Kornelia", "Zmrok", "zaoczne", "d.awid@interia.pl");
         Student s5 = new Student(105L, "Adam", "Mickiewicz", "dzienne", "d.awid@interia.pl");
         Student s6 = new Student(106L, "Juliusz", "Slowacki", "zaoczne", "d.awid@interia.pl");
-        Student s7 = new Student(107L, "Leopld", "Staff", "dzienne", "d.awid@interia.pl");
+        Student s7 = new Student(107L, "Leopold", "Staff", "dzienne", "d.awid@interia.pl");
         Student s8 = new Student(108L, "Wislawa", "Szymborska", "zaoczne", "d.awid@interia.pl");
         Student s9 = new Student(109L, "Halina", "Poswiatowska", "dzienne", "d.awid@interia.pl");
         Student s10 = new Student(110L, "Jan", "Brzechwa", "zaoczne", "d.awid@interia.pl");
