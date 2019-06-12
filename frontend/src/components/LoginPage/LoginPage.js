@@ -12,7 +12,7 @@ class LoginPage extends Component {
         user_type: '',
         message: '',
         test: '',
-
+        
         errors: {
             userName: false,
             userSurname: false,
