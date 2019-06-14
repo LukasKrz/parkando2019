@@ -90,7 +90,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     }
 
     private List<MiejsceDodatkoweWeekend> createMiejscaDodatkoweWeekendDlaDziennych() {
-        MiejsceDodatkoweWeekend m8 = new MiejsceDodatkoweWeekend("A", 8L, 101L, LocalDate.now().minusDays(3L), 111L, LocalDate.now().minusDays(1111L));
+        MiejsceDodatkoweWeekend m8 = new MiejsceDodatkoweWeekend("A", 8L, 111L, LocalDate.now().minusDays(3L), 111L, LocalDate.now().minusDays(1111L));
         MiejsceDodatkoweWeekend m9 = new MiejsceDodatkoweWeekend("A", 9L, 111L, LocalDate.now().minusDays(1111L), 111L, LocalDate.now().minusDays(1111L));
         MiejsceDodatkoweWeekend m10 = new MiejsceDodatkoweWeekend("A", 10L, 111L, LocalDate.now().minusDays(1111L), 107L, LocalDate.now().minusDays(1L));
         List<MiejsceDodatkoweWeekend> miejsca = new ArrayList<>();
@@ -99,8 +99,8 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     }
 
     private List<MiejsceDodatkoweTydzien> createMiejscaDodatkoweTydzienDlaZaocznych() {
-        MiejsceDodatkoweTydzien m8 = new MiejsceDodatkoweTydzien("A", 8L, 114L, LocalDate.now().minusDays(2L), 102L, LocalDate.now(), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L));
-        MiejsceDodatkoweTydzien m9 = new MiejsceDodatkoweTydzien("A", 9L, 106L, LocalDate.now().minusDays(1106L), 106L , LocalDate.now().minusDays(1106L), 103L, LocalDate.now().minusDays(4L), 104L, LocalDate.now().minusDays(1L),106L, LocalDate.now().minusDays(1106L));
+        MiejsceDodatkoweTydzien m8 = new MiejsceDodatkoweTydzien("A", 8L, 106L, LocalDate.now().minusDays(2L), 102L, LocalDate.now(), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L));
+        MiejsceDodatkoweTydzien m9 = new MiejsceDodatkoweTydzien("A", 9L, 106L, LocalDate.now().minusDays(1106L), 106L , LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(4L), 104L, LocalDate.now().minusDays(1L),106L, LocalDate.now().minusDays(1106L));
         MiejsceDodatkoweTydzien m10 = new MiejsceDodatkoweTydzien("A", 10L, 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 108L, LocalDate.now());
         List<MiejsceDodatkoweTydzien> miejsca = new ArrayList<>();
         miejsca.addAll(Arrays.asList(m8, m9, m10));
