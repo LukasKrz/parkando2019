@@ -78,7 +78,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     private List<MiejscePodstawowe> createMiejscaPodstawowe() {
         MiejscePodstawowe m1 = new MiejscePodstawowe("A", 1L, 101L, LocalDate.now(), 103L, LocalDate.now().minusDays(4L));
-        MiejscePodstawowe m2 = new MiejscePodstawowe("A", 2L, 105L, LocalDate.now(), 110L, LocalDate.now().minusDays(1000L));
+        MiejscePodstawowe m2 = new MiejscePodstawowe("A", 2L, 105L, LocalDate.now(), 118L, LocalDate.now().minusDays(1000L));
         MiejscePodstawowe m3 = new MiejscePodstawowe("A", 3L, 111L, LocalDate.now().minusDays(15L), 114L, LocalDate.now().minusDays(1L));
         MiejscePodstawowe m4 = new MiejscePodstawowe("A", 4L, 107L, LocalDate.now(), 102L, LocalDate.now().minusDays(5L));
         MiejscePodstawowe m5 = new MiejscePodstawowe("A", 5L, 111L, LocalDate.now().minusDays(30L), 108L, LocalDate.now().minusDays(4L));
@@ -90,7 +90,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     }
 
     private List<MiejsceDodatkoweWeekend> createMiejscaDodatkoweWeekendDlaDziennych() {
-        MiejsceDodatkoweWeekend m8 = new MiejsceDodatkoweWeekend("A", 8L, 111L, LocalDate.now().minusDays(3L), 111L, LocalDate.now().minusDays(1111L));
+        MiejsceDodatkoweWeekend m8 = new MiejsceDodatkoweWeekend("A", 8L, 101L, LocalDate.now().minusDays(3L), 111L, LocalDate.now().minusDays(1111L));
         MiejsceDodatkoweWeekend m9 = new MiejsceDodatkoweWeekend("A", 9L, 111L, LocalDate.now().minusDays(1111L), 111L, LocalDate.now().minusDays(1111L));
         MiejsceDodatkoweWeekend m10 = new MiejsceDodatkoweWeekend("A", 10L, 111L, LocalDate.now().minusDays(1111L), 107L, LocalDate.now().minusDays(1L));
         List<MiejsceDodatkoweWeekend> miejsca = new ArrayList<>();
@@ -99,7 +99,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     }
 
     private List<MiejsceDodatkoweTydzien> createMiejscaDodatkoweTydzienDlaZaocznych() {
-        MiejsceDodatkoweTydzien m8 = new MiejsceDodatkoweTydzien("A", 8L, 106L, LocalDate.now().minusDays(2L), 102L, LocalDate.now(), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L));
+        MiejsceDodatkoweTydzien m8 = new MiejsceDodatkoweTydzien("A", 8L, 114L, LocalDate.now().minusDays(2L), 102L, LocalDate.now(), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L));
         MiejsceDodatkoweTydzien m9 = new MiejsceDodatkoweTydzien("A", 9L, 106L, LocalDate.now().minusDays(1106L), 106L , LocalDate.now().minusDays(1106L), 103L, LocalDate.now().minusDays(4L), 104L, LocalDate.now().minusDays(1L),106L, LocalDate.now().minusDays(1106L));
         MiejsceDodatkoweTydzien m10 = new MiejsceDodatkoweTydzien("A", 10L, 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 106L, LocalDate.now().minusDays(1106L), 108L, LocalDate.now());
         List<MiejsceDodatkoweTydzien> miejsca = new ArrayList<>();
@@ -125,8 +125,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         Student s15 = new Student(115L, "Witold", "Gombrowicz", "dzienne", "d.awid@interia.pl");
         Student s16 = new Student(116L, "Adam", "Asnyk", "dzienne", "d.awid@interia.pl");
         Student s17 = new Student(117L, "Czeslaw", "Milosz", "zaoczne", "d.awid@interia.pl");
+        Student s18 = new Student(118L, "Dorota", "Maslowska", "zaoczne", "d.awid@interia.pl");
         List<Student> studenci = new ArrayList<>();
-        studenci.addAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17));
+        studenci.addAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18));
         return studenci;
     }
 }
