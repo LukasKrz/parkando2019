@@ -34,7 +34,7 @@ class ChoicePage extends Component {
           fetch(`/miejsca/dostepnedodatkowe/${this.props.userType}`)
             .then(response => response.json())
             .then(data => {
-                this.setState({extraSpaces: this.getEmptyExtraPlaces(data, Number(this.props.match.params.extra_place))}); //TODO -> 1 to poniedzialek
+                this.setState({extraSpaces: this.getEmptyExtraPlaces(data, Number(this.props.match.params.extra_place))});
             });
       }
 

@@ -6,6 +6,9 @@ import InfoButton from '../InfoModal/InfoButton.js';
 
 class FinalConfirmationPage extends Component {    
     render() {
+        // console.log('data podsta: ', this.props.reservationDatePodstawowe);
+        // console.log('data dodatkowa: ', this.props.reservationDateDodatkowe);
+
         return (
             <section className="confirmation-container confirmation-container--final-view">
                 <InfoButton history={this.props.history}/>

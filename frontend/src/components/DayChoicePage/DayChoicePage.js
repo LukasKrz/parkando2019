@@ -28,16 +28,16 @@ class DayChoicePage extends Component {
                 : (data.poniedzialek.length + data.wtorek.length + data.sroda.length + data.czwartek.length + data.piatek.length === 0);
             
                 this.setState({
-                pon: data.poniedzialek,
+                    pon: data.poniedzialek,
                     wt: data.wtorek,
                     sr: data.sroda,
                     czw: data.czwartek,
                     pt: data.piatek,
                     sob: data.sobota,
                     niedz: data.niedziela,
-                noPlace: isAnyFreePlace
-            })
-          });
+                    noPlace: isAnyFreePlace
+                })
+            });
     }
 
     handleClick = (e) => {

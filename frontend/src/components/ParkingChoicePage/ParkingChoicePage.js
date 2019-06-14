@@ -64,6 +64,8 @@ class ParkingChoicePage extends Component {
     }
 
     render() {
+        // console.log('EMPTY: ', this.state.emptySpaces, ' EXTRA: ', this.state.extraSpaces);
+        
         return (
             <section className="parking-choice-container">
                 <InfoButton history={this.props.history}/>

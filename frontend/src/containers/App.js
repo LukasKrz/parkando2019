@@ -21,10 +21,10 @@ class App extends Component {
     expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
     userSurname: '',
-    reservationDatePodstawowe: moment().add(6, 'd').format('DD.MM.YYYY'), 
+    reservationDatePodstawowe: null, 
     parkPlaceIdDodatkowe: null,
     dayOfWeek: 0, 
-    reservationDateDodatkowe: moment().add(6, 'd').format('DD.MM.YYYY')
+    reservationDateDodatkowe: null
  }
 
   choiceHandler = (number) => {
@@ -40,16 +40,14 @@ class App extends Component {
       userName: userName,
       userSurname: userSurname,
       park_place_id: placeId,
-      reservationDatePodstawowe: reservationDatePodstawowe, 
+      reservationDatePodstawowe: reservationDatePodstawowe && moment(reservationDatePodstawowe).format('DD.MM.YYYY'), 
       parkPlaceIdDodatkowe: parkPlaceIdDodatkowe,
       dayOfWeek: dayOfWeek, 
-      reservationDateDodatkowe: reservationDateDodatkowe
+      reservationDateDodatkowe: reservationDateDodatkowe && moment(reservationDateDodatkowe).format('DD.MM.YYYY')
     })
   }
 
-  render() {
-    console.log('APP: ', this.state.dayOfWeek);
-    
+  render() {    
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
@@ -125,6 +123,8 @@ class App extends Component {
                 userName={this.state.userName}
                 userSurname={this.state.userSurname}
                 userType={this.state.user_type}
+                reservationDatePodstawowe={this.state.reservationDatePodstawowe}
+                reservationDateDodatkowe={this.state.reservationDateDodatkowe}
                 expirationDate={this.state.expiration_date}
               />
             }
@@ -152,6 +152,8 @@ class App extends Component {
                 userType={this.state.user_type}
                 expirationDate={this.state.expiration_date}
                 placeId={this.state.park_place_id}
+                reservationDatePodstawowe={this.state.reservationDatePodstawowe}
+                reservationDateDodatkowe={this.state.reservationDateDodatkowe}
               />
             }
             match={matchPath}

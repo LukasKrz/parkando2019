@@ -47,6 +47,9 @@ class FinalConfirmationWithTwoReservation extends Component {
     }
 
     render() {
+        // console.log('final, data podsta: ', this.props.reservationDatePodstawowe);
+        // console.log('final, data dodatkowa: ', this.props.reservationDateDodatkowe);
+
         const extraDate = this.getExperienceDateForExactDay(Number(this.props.match.params.extra_place)).format('DD.MM.YYYY');        
         return (
             <section className="confirmation-container confirmation-container--two-reservation">

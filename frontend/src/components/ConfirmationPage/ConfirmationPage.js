@@ -76,8 +76,15 @@ class ConfirmationPage extends Component {
         }
     }
 
+    handleBackButton = (e) => {
+        e.preventDefault(); 
+        const extraPlace = Number(this.props.match.params.extra_place);
+        extraPlace === 0
+        ? this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/0`)
+        : this.props.history.push(`/day-choice/${this.props.match.params.card_id}`)
+    }
+
     render() {
-        const extraPlace = Number(this.props.match.params.extra_place);        
         return (
             <section className="confirmation-container">
                 <InfoButton history={this.props.history} />
@@ -92,7 +99,8 @@ class ConfirmationPage extends Component {
                     </button>
                     <button
                         className="buttons-section__back-btn"
-                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/${extraPlace}`)}} // TODO!!!
+                        onClick={this.handleBackButton}
+                        // onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/${Number(this.props.match.params.extra_place)}`)}} // TODO!!!
                     >
                         COFNIJ
                     </button>
